@@ -1,4 +1,4 @@
 openjavaLab
 ===========
 
-basic javaee program for my qq.
+博客项目。
