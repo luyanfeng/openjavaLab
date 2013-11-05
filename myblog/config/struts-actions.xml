@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<!-- 前台 -->
+    <package name="home" namespace="/home" extends="default">
+    	<default-action-ref name="noPage" />
+        <action name="noPage">
+            <result>/WEB-INF/comm/404.jsp</result>
+        </action>
+    	<!-- 导航 -->
+        <action name="*" method="{1}" class="homeAction">
+            <result type="dispatcher" name="index">/WEB-INF/home/{1}.jsp</result>
+            <result type="dispatcher" name="article">/WEB-INF/home/{1}.jsp</result>
+            <result type="dispatcher" name="work">/WEB-INF/home/{1}.jsp</result>
+            <result type="dispatcher" name="about">/WEB-INF/home/{1}.jsp</result>
+            <result type="dispatcher" name="discuss">/WEB-INF/home/{1}.jsp</result>
+            <result type="dispatcher" name="picture">/WEB-INF/home/{1}.jsp</result>
+        </action>
+    </package>
+
+<!-- 后台 -->
+	<package name="admin" namespace="/admin" extends="default">
+		<default-action-ref name="noPage" />
+		<action name="noPage">
+            <result>/WEB-INF/comm/404.jsp</result>
+        </action>
+        
+		<action name="*" method="{1}" class="adminAction">
+			<result type="dispatcher" name="index">/WEB-INF/admin/{1}.jsp</result>
+			<result type="dispatcher" name="login">/WEB-INF/admin/{1}.jsp</result>
+		</action>
+	</package>
+
+</struts>
