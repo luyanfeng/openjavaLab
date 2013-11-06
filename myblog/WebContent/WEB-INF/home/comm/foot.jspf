@@ -41,6 +41,6 @@
 	<a href="http://fotogrph.com/">网易</a> | 
 	<a href="http://www.heartinternet.co.uk/vps/">新浪</a> |
 	<a href="#">搜狐</a> |
-	<a href="${pageContext.request.contextPath }/admin/login.jap">站点管理</a>
+	<a href="${applicationScope.path }/admin/login.jap">站点管理</a>
 </div>
 <!--close footer-->

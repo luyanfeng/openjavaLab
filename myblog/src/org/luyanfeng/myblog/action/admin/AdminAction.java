@@ -18,6 +18,8 @@ public class AdminAction extends BasicAction<UserEntity>{
 	/** 导航 后期做成枚举*/
 	private String nav;
 	
+	private UserEntity user =new UserEntity();
+	
 	
 	@Resource(name="articleServiceIml")
 	private ArticleServiceIml service;
@@ -27,16 +29,15 @@ public class AdminAction extends BasicAction<UserEntity>{
 	public String index(){
 		return "index";
 	}
-	// 后台权限校验
+	//TODO 后台权限校验 ,改用Interceptor实现
 	public void validateIndex(){
-		System.out.println("do.......");
-		HttpSession session = this.getRequest().getSession();
+		/*HttpSession session = this.getRequest().getSession();
 		if(session.isNew()  || (StringUtils.isBlank(this.getModel().getUser()) || StringUtils.isBlank(this.getModel().getPasswd()))){
 			this.addActionError("你无权访问！");
 		}else{
 			// mysql .
 			session.setAttribute("login", this.getModel());
-		}
+		}*/
 	}
 	/**
 	 * 登录

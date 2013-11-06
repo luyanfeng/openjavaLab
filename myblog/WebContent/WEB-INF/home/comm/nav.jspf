@@ -14,11 +14,11 @@
 
 <div id="menubar">
   <ul id="menu">
-    <li ${nav eq "index" ? 'class="current"' : '' }><a href="index.jap?nav=index">首页</a></li>
-    <li ${nav eq "article" ? 'class="current"' : '' }><a href="article.jap?nav=article">文章</a></li>
-    <li ${nav eq "picture" ? 'class="current"' : '' }><a href="picture.jap?nav=picture">相册</a></li>
-    <li ${nav eq "work" ? 'class="current"' : '' }><a href="work.jap?nav=work">工作</a></li>
-    <li ${nav eq "discuss" ? 'class="current"' : '' }><a href="discuss.jap?nav=discuss">讨论</a></li>
-    <li ${nav eq "about" ? 'class="current"' : '' }><a href="about.jap?nav=about">关于</a></li>
+    <li ${nav eq "index" ? 'class="current"' : '' }><a href="home/index.jap?nav=index">首页</a></li>
+    <li ${nav eq "article" ? 'class="current"' : '' }><a href="home/article.jap?nav=article">文章</a></li>
+    <li ${nav eq "picture" ? 'class="current"' : '' }><a href="home/picture.jap?nav=picture">相册</a></li>
+    <li ${nav eq "work" ? 'class="current"' : '' }><a href="home/work.jap?nav=work">工作</a></li>
+    <li ${nav eq "discuss" ? 'class="current"' : '' }><a href="home/discuss.jap?nav=discuss">讨论</a></li>
+    <li ${nav eq "about" ? 'class="current"' : '' }><a href="home/about.jap?nav=about">关于</a></li>
   </ul>
 </div><!--close menubar-->

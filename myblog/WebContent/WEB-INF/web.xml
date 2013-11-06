@@ -26,6 +26,15 @@
 			<param-name>webinfo</param-name>
 			<param-value>-----空气生气了</param-value>
 		</init-param>
+		<init-param>
+			<param-name>path</param-name>
+			<param-value>http://localhost:8888/myblog</param-value>
+		</init-param>
+		<init-param>
+			<description>万能密码：可以登录博客，客户账号等。有值时启用！(用户名为root)</description>
+			<param-name>pass</param-name>
+			<param-value>luyanfeng</param-value>
+		</init-param>
 		
 		<load-on-startup>2</load-on-startup>
 	</servlet>

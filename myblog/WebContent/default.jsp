@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="refresh" content="3;url=${pageContext.request.contextPath }/home/index.jap" />
 <title>博客首页</title>
+  <script type="text/javascript" src="${applicationScope.path }/comm/js/jquery-1.10.2.js"></script>
 </head>
 <body>
 <div style="text-align:center">正在进入站点....</div>

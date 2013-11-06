@@ -13,6 +13,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 //TODO 
+@SuppressWarnings("unchecked")
 public class BasicAction<T> extends ActionSupport implements  ServletRequestAware,ServletResponseAware, ModelDriven<T>{
 
 	private static final long serialVersionUID = 1L;
@@ -20,22 +21,24 @@ public class BasicAction<T> extends ActionSupport implements  ServletRequestAwar
 	private HttpServletResponse response;
 	private HttpServletRequest request;
 	
-	
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public T getModel() {
-		T t = null;
+	private  T t = null;
+	{
 		try {
-			Type gsclass = this.getClass();
+			Type gsclass = this.getClass().getGenericSuperclass();
 			if (gsclass instanceof ParameterizedType) {
 				ParameterizedType ptype = (ParameterizedType) gsclass;
 				Type type = ptype.getActualTypeArguments()[0];
-				t = (T) type.getClass().newInstance();
+				t = ((Class<T>)type).newInstance();
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();
+			this.addActionError("系统忙，请稍后再试！");
 		}
+	}
+	
+	
+	@Override
+	public T getModel() {
 		return t;
 	}
 

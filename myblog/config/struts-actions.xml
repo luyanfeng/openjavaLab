@@ -31,6 +31,7 @@
 		<action name="*" method="{1}" class="adminAction">
 			<result type="dispatcher" name="index">/WEB-INF/admin/{1}.jsp</result>
 			<result type="dispatcher" name="login">/WEB-INF/admin/{1}.jsp</result>
+<!-- 			<result name="error">/WEB-INF/comm/error.jsp</result> -->
 		</action>
 	</package>
 
