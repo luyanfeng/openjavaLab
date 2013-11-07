@@ -11,9 +11,9 @@
 <script type="text/javascript" src="${applicationScope.path }/comm/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="${applicationScope.path }/comm/js/simpla.jquery.configuration.js"></script>
 <script type="text/javascript" src="${applicationScope.path }/comm/js/facebox.js"></script>
-<script type="text/javascript" src="${applicationScope.path }/comm/js/jquery.wysiwyg.js"></script>
 </head>
 <body>
+
 <div id="body-wrapper">
   <div id="sidebar">
     <%@ include file="/WEB-INF/admin/nav.jspf" %>

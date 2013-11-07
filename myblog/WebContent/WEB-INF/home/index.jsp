@@ -58,5 +58,10 @@
 	</div>
 	
 	<%@ include file="/WEB-INF/home/comm/foot.jspf" %>  
+	
+<script type="text/javascript">
+
+
+</script>
 </body>
 </html>
