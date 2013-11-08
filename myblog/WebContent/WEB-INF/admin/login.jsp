@@ -22,21 +22,23 @@
     <a href="#"><img id="logo" src="${applicationScope.path }/comm/admin/images/logo.png" alt="Simpla Admin logo" /></a> </div>
   <!-- End #logn-top -->
   <div id="login-content">
-    <form action="${applicationScope.path }/admin/index.jap" method="post">
+    <form action="${applicationScope.path }/admin/login.jap" method="post">
       <div class="notification information png_bg">
         <div></div>
-        <div> 请注意：只有管理员才可以从这里登录，否则失败三次后系统会自动屏蔽您的IP！ </div>
+        <div>注意：只有管理员才可以从这里登录，否则失败三次后系统会自动屏蔽您的IP！ </div>
       </div>
       <p>
+        <label>E-Mail</label>
+        <input class="text-input" type="text" name="email"/>
+      </p>
+      <p>
         <label>用户名</label>
-<!--         <input class="text-input" type="text" name="user"/> -->
-		<s:textfield name="user" cssClass="text-input"/>
+        <input class="text-input" type="text" name="user"/>
       </p>
       <div class="clear"></div>
       <p>
         <label>密码</label>
-<!--         <input class="text-input" type="password"  name="passwd"/> -->
-		<s:password cssClass="text-input" name="passwd"/>
+        <input class="text-input" type="password"  name="passwd"/>
       </p>
       <div class="clear"></div>
       <p id="remember-password">

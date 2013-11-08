@@ -17,4 +17,5 @@ public interface BasicDao<T> {
 	public boolean saveAll(T...entities);
 
 	public List<T> getPage(int skip, int limit);
+	
 }

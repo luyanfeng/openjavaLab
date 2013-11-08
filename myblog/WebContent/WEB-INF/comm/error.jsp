@@ -12,7 +12,9 @@
 <div style="text-align:center">
 出错啦 ！
 <hr />
-<s:actionerror />
+<s:actionerror /><br />
+<s:fielderror /><br />
+<s:actionmessage /><br />
 </div>
 </body>
 </html>
