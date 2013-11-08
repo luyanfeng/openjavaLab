@@ -13,6 +13,15 @@
     
 
     <package name="default" namespace="/" extends="struts-default">
+		<interceptors>  
+			<!-- 用户认证拦截器 -->
+            <interceptor name="authenticate" class="org.luyanfeng.myblog.authenticate.AuthenticateInterceptor" />  
+            <interceptor-stack name="loginStack">  
+                <interceptor-ref name="authenticate" />  
+                <interceptor-ref name="defaultStack" />  
+            </interceptor-stack>  
+        </interceptors>
+
 
         <default-action-ref name="noPage" />
 

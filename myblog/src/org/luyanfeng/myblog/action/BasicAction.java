@@ -63,4 +63,5 @@ public class BasicAction<T> extends ActionSupport implements  ServletRequestAwar
 	public HttpServletRequest getRequest() {
 		return request;
 	}
+	
 }
