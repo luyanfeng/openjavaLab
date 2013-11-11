@@ -9,7 +9,6 @@
 		<div class="readmore">
 			<a href="#">阅读</a>
 		</div>
-		<!--close readmore-->
 	</div>
 	<!--close content_bottom_container_box-->
 	<div class="content_bottom_container_box">
@@ -18,7 +17,6 @@
 		<div class="readmore">
 			<a href="#">查看</a>
 		</div>
-		<!--close readmore-->
 	</div>
 	<!--close content_bottom_container_box-->
 	<div class="content_bottom_container_boxl">
@@ -27,20 +25,15 @@
 		<div class="readmore">
 			<a href="#">查看</a>
 		</div>
-		<!--close readmore-->
 	</div>
 	<!--close content_bottom_container_box1-->
 	<br style="clear: both" />
 </div>
-<!--close content_bottom-->
-
-<!--close main-->
 
 <div id="footer">
 	<a href="http://validator.w3.org/check?uri=referer">百度</a> | 
 	<a href="http://fotogrph.com/">网易</a> | 
 	<a href="http://www.heartinternet.co.uk/vps/">新浪</a> |
 	<a href="#">搜狐</a> |
-	<a href="${applicationScope.path }/admin/toLogin.jap">站点管理</a>
+	<a href="${applicationScope.path }/login/toLogin.jap" >站点管理</a>
 </div>
-<!--close footer-->

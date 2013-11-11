@@ -6,6 +6,7 @@ import org.luyanfeng.myblog.dao.iml.LoginDaoIml;
 import org.luyanfeng.myblog.entity.UserEntity;
 import org.springframework.stereotype.Service;
 
+
 @Service("loginServiceIml")
 public class LoginServiceIml extends BasicServiceIml<UserEntity> {
 

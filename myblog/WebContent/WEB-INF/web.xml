@@ -9,12 +9,7 @@
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>index.jap</welcome-file>
 	</welcome-file-list>
-	
-	<listener>
-    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<!-- 我的全局定义 -->
+<!-- 我的全局定义 -->
 	<servlet>
 		<servlet-name>globalConfigServlet</servlet-name>
 		<servlet-class>org.luyanfeng.myblog.configuration.GlobalConfigServlet</servlet-class>
@@ -35,13 +30,21 @@
 			<param-name>pass</param-name>
 			<param-value>luyanfeng</param-value>
 		</init-param>
-		
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	
-	<!-- 我的filter -->
+<!-- 我的filter -->
 	
-	<!-- struts2  -->
+<!-- hibernate4 session -->
+	<!-- <filter>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+<!-- struts2  -->
 	<filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -51,5 +54,8 @@
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+ <!-- spring -->
+	<listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>

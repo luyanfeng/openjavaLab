@@ -15,18 +15,19 @@
     <package name="default" namespace="/" extends="struts-default">
 		<interceptors>  
 			<!-- 用户认证拦截器 -->
-            <interceptor name="authenticate" class="org.luyanfeng.myblog.authenticate.AuthenticateInterceptor" />  
+            <interceptor name="authenticate" class="org.luyanfeng.myblog.interceptor.AuthenticateInterceptor" />  
             <interceptor-stack name="loginStack">  
                 <interceptor-ref name="authenticate" />  
                 <interceptor-ref name="defaultStack" />  
             </interceptor-stack>  
         </interceptors>
 
-
         <default-action-ref name="noPage" />
 
         <global-results>
             <result name="error">/WEB-INF/comm/error.jsp</result>
+            
+            
         </global-results>
 
         <global-exception-mappings>

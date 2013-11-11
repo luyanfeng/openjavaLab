@@ -11,14 +11,13 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<property name="hibernate.show_sql">true</property>
 		
-		
-		<property name="hibernate.c3p0.max_size">20</property>
+		<!-- <property name="hibernate.c3p0.max_size">20</property>
 		<property name="hibernate.c3p0.min_size">2</property>
 		<property name="hibernate.c3p0.timeout">5000</property>
 		<property name="hibernate.c3p0.idle_test_period">3000</property>
 		<property name="hibernate.c3p0.max_statements">50</property>
 		<property name="hibernate.c3p0.acquire_increment">2</property>
-		<property name="hibernate.c3p0.validate">false</property>
+		<property name="hibernate.c3p0.validate">false</property> -->
 		 
 		<!-- <class-cache
 			class="org.hibernate.test.legacy.Simple"

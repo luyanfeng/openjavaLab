@@ -23,4 +23,8 @@ public class GenericUtil {
 		return null;
 		
 	}
+	//
+	public static enum SessionInfo {
+		USER_EMAIL,USER_NAME,USER_NICKNAME, USER_INFO
+	}
 }

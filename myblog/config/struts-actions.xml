@@ -6,22 +6,18 @@
 <struts>
 <!-- 用户登录专用 -->
     <package name="login" namespace="/login" extends="default">
-    	<default-action-ref name="noPage" />
-        <action name="noPage">
-            <result>/WEB-INF/comm/404.jsp</result>
-        </action>
     	<!-- 导航 -->
         <action name="*" method="{1}" class="loginAction">
-            <result type="dispatcher" name="index">/WEB-INF/home/{1}.jsp</result>
-            <result type="dispatcher" name="login">/WEB-INF/home/{1}.jsp</result>
+            <result type="redirectAction">
+            	<param name="actionName">index</param>
+            	<param name="namespace">/admin</param>
+            </result>
+            <result type="dispatcher" name="toLogin">/WEB-INF/admin/{1}.jsp</result>
+            <result type="dispatcher" name="error">/WEB-INF/admin/toLogin.jsp</result>
         </action>
     </package>
 <!-- 前台 -->
     <package name="home" namespace="/home" extends="default">
-    	<default-action-ref name="noPage" />
-        <action name="noPage">
-            <result>/WEB-INF/comm/404.jsp</result>
-        </action>
     	<!-- 导航 -->
         <action name="*" method="{1}" class="homeAction">
             <result type="dispatcher" name="index">/WEB-INF/home/{1}.jsp</result>
@@ -35,15 +31,9 @@
 
 <!-- 后台 -->
 	<package name="admin" namespace="/admin" extends="default">
-		<default-action-ref name="noPage" />
-		<action name="noPage">
-            <result>/WEB-INF/comm/404.jsp</result>
-        </action>
-        
 		<action name="*" method="{1}" class="adminAction">
+        	<interceptor-ref name="loginStack" />
 			<result type="dispatcher" name="index">/WEB-INF/admin/{1}.jsp</result>
-			<result type="dispatcher" name="login">/WEB-INF/admin/{1}.jsp</result>
-<!-- 			<result name="error">/WEB-INF/comm/error.jsp</result> -->
 		</action>
 	</package>
 

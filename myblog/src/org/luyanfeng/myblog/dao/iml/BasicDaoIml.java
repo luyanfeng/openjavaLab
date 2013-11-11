@@ -1,26 +1,44 @@
 package org.luyanfeng.myblog.dao.iml;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.luyanfeng.myblog.dao.BasicDao;
 import org.luyanfeng.myblog.util.GenericUtil;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import org.springframework.stereotype.Repository;
 
-public  class BasicDaoIml<T> extends HibernateDaoSupport implements BasicDao<T> {
+@SuppressWarnings("unchecked")
+public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 	
-	protected Class<T> getT() {
+	private SessionFactory sf;
+	private Session session;
+	protected Session getSession() {
+		if(this.session == null || !this.session.isOpen()){
+			this.session = sf.getCurrentSession();
+		}
+		return session;
+	}
+	protected SessionFactory getSf() {
+		return sf;
+	}
+	/**
+	 *  注入sessionfectory 时一最好super.setSf(sf)下，不然BasicDaoIml下的方法将不能用。
+	 */
+	protected void setSf(SessionFactory sf){
+		this.sf = sf;
+	}
+
+
+	protected Class<T> getEntity() {
 		return  (Class<T>) GenericUtil.getGenericClass(getClass());
 	}
+	
 
 	@Override
 	public T getOne(String id) {
-		return (T) this.getHibernateTemplate().get(this.getT().getSimpleName(), id);
+		T t = (T) this.getSession().get(this.getEntity().getSimpleName(), id);
+		return t;
 	}
 
 	@Deprecated
@@ -34,7 +52,7 @@ public  class BasicDaoIml<T> extends HibernateDaoSupport implements BasicDao<T> 
 	public boolean delSome(String... ids) {
 		boolean result = true;
 		try {
-			this.getHibernateTemplate().delete(this.getT().getSimpleName(),this.getT());
+			this.getSession().delete(this.getEntity().getSimpleName(),this.getEntity());
 		} catch (Exception e) {
 			result = false;
 			e.printStackTrace();
@@ -44,7 +62,7 @@ public  class BasicDaoIml<T> extends HibernateDaoSupport implements BasicDao<T> 
 
 	@Override
 	public boolean addOne(T entity) {
-		Serializable save = this.getHibernateTemplate().save(entity);
+		Serializable save = this.getSession().save(entity);
 		return save != null ;
 	}
 
@@ -53,7 +71,7 @@ public  class BasicDaoIml<T> extends HibernateDaoSupport implements BasicDao<T> 
 		boolean result = true;
 		try {
 			for (T t : entities) {
-				this.getHibernateTemplate().saveOrUpdate(t);
+				this.getSession().saveOrUpdate(t);
 			}
 		} catch (Exception e) {
 			result = false;
@@ -64,14 +82,7 @@ public  class BasicDaoIml<T> extends HibernateDaoSupport implements BasicDao<T> 
 
 	@Override
 	public List<T> getPage(final int skip, final int limit) {
-		HibernateCallback<List<T>> action = new HibernateCallback<List<T>>() {
-			@Override
-			public List<T> doInHibernate(Session session)
-					throws HibernateException, SQLException {
-				return session.createQuery("from "+getT().getSimpleName()).setMaxResults(limit).setFirstResult(skip).list();
-			}
-		};
-		return this.getHibernateTemplate().execute(action  );
+		return this.getSession().createQuery("from "+getEntity().getSimpleName()).setMaxResults(limit).setFirstResult(skip).list();
 	}
 
 
