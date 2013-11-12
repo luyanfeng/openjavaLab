@@ -67,3 +67,47 @@
    </div> -->
    
    <div class="clear"></div>
+<script type="text/javascript">
+// 编辑
+function writer_(id){
+	if(id){
+		$.ajax({
+			type:"post",
+			data:{"id":id},
+			url:"${applicationScope.path }/admin/article/writer.jap",
+			success:function(o){
+				$(".content-box").html(o);
+			}
+		});
+	}else{
+		alert("js错误");
+	}
+}
+// 删除
+function delete_(id,name){
+	if(id && confirm("确认后删除【"+name+"】")){
+		$.ajax({
+			type:"post",
+			data:{"id":id},
+			url:"${applicationScope.path }/admin/article/delete.jap",
+			success:function(o){
+				if(o.s == 1){
+					$.ajax({
+						url:"${applicationScope.path }/admin/article/list.jap",
+						type:"post",
+						data:{"nav": $(this).text()},
+						beforeSend:function(){
+							$(".content-box").html("<h1>系统正在给力的为您加载组件....</h1>");
+						},
+						success:function(o){
+							$(".content-box").html(o);
+						}
+					});
+				}else{
+					alert("删除有问题！");
+				}
+			}
+		});
+	}
+}
+</script>

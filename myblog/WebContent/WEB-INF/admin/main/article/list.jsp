@@ -7,8 +7,8 @@
 <div class="content-box-content">
   <div class="tab-content default-tab" id="tab1">
       <!-- This is the target div. id must match the href of this div's tab -->
-      <div class="notification attention png_bg"> <a href="#" class="close"><img src="${applicationScope.path }/comm/admin/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
-        <div>这是条提示信息！</div>
+      <div style="display:${display eq 1 ? '' :'none'} ;" class="notification attention png_bg"> <a href="#" class="close"><img src="${applicationScope.path }/comm/admin/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+        <div><s:actionerror /><s:actionmessage/> </div>
       </div>
       <table>
         <thead>
@@ -49,14 +49,14 @@
         <s:iterator status="vs" value="list" var="article">
           <tr>
             <td><input type="checkbox" /></td>
-            <td>如何保护动物</td>
-            <td>2013年11月35日 8:50 am</td>
+            <td><a href="${applicationScope.path}/home/article/detail.jap?id=${article.id}" target="_blank" ><s:property value="#article.title"/></a></td>
+            <td>${empty article.updateTime ? article.time : article.updateTime}</td>
             <td>456</td>
             <td>1501</td>
             <td><a href="javascript:void(0)">不可评论</a></td>
             <td>
-              <a href="javascript:void(0)" title="Edit"><img src="${applicationScope.path }/comm/admin/images/icons/pencil.png" alt="Edit" /></a> 
-              <a href="javascript:void(0)" title="Delete"><img src="${applicationScope.path }/comm/admin/images/icons/cross.png" alt="Delete" /></a> 
+              <a href="javascript:void(0)" onclick="writer_('${article.id}')" title="Edit"><img src="${applicationScope.path }/comm/admin/images/icons/pencil.png" alt="Edit" /></a> 
+              <a href="javascript:void(0)" onclick="delete_('${article.id}','${article.title }')" title="Delete"><img src="${applicationScope.path }/comm/admin/images/icons/cross.png" alt="Delete" /></a> 
               <a href="javascript:void(0)" title="Edit Meta"><img src="${applicationScope.path }/comm/admin/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a> 
             </td>
           </tr>

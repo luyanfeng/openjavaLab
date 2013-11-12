@@ -7,11 +7,18 @@ import org.luyanfeng.myblog.service.BasicService;
 
 public class BasicServiceIml<T> implements BasicService<T> {
 
-	protected BasicDao<T> dao;
+	private BasicDao<T> dao;
 
+	public BasicDao<T> getDao() {
+		return dao;
+	}
+	public void setDao(BasicDao<T> dao) {
+		System.out.println("basicDao init.....");
+		this.dao = dao;
+	}
 
 	@Override
-	public T getOne(String id) {
+	public T getOne(String id) throws Exception {
 		return this.dao.getOne(id);
 	}
 
@@ -20,12 +27,12 @@ public class BasicServiceIml<T> implements BasicService<T> {
 		return this.dao.getSome(ids);
 	}
 	@Override
-	public List<T> getPage(int skip, int limit ) {
-		return this.dao.getPage(skip,limit);
+	public List<T> getPage(int skip, int limit ) throws Exception {
+		return this.dao.getPage(skip, limit);
 	}
 
 	@Override
-	public boolean delSome(String... ids) {
+	public boolean delSome(String... ids) throws Exception {
 		return this.dao.delSome(ids);
 	}
 

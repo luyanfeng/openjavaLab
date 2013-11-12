@@ -41,10 +41,6 @@ public class BasicAction<T> extends ActionSupport implements  ServletRequestAwar
 	public T getModel() {
 		return t;
 	}
-
-
-
-
 	@Override
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;

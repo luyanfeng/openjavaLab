@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 @Service("articleServiceIml")
 public class ArticleServiceIml extends BasicServiceIml<ArticleEntity> {
 
-	
-	
 	@Resource(name="articleDaoIml")
-	private BasicDao<ArticleEntity> dao;
+	@Override
+	public void setDao(BasicDao<ArticleEntity> dao) {
+		super.setDao(dao);
+	}
+
+	
 
 }

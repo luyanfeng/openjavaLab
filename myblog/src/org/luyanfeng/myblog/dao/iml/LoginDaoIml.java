@@ -27,7 +27,6 @@ public class LoginDaoIml extends BasicDaoIml<UserEntity> {
 	public boolean isLogin(){
 		return false;
 	}
-	//TODO 1234
 	/**
 	 * 得到一个注册用户
 	 */
@@ -55,7 +54,6 @@ public class LoginDaoIml extends BasicDaoIml<UserEntity> {
 	public boolean shouldLogin(String user, String passwd, String email){
 		try {
 			UserEntity user2 = this.getUser(user, passwd, email);
-			System.out.println(user2);
 			return user2 != null;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -2,6 +2,7 @@ package org.luyanfeng.myblog.util;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.UUID;
 
 public class GenericUtil {
 
@@ -26,5 +27,8 @@ public class GenericUtil {
 	//
 	public static enum SessionInfo {
 		USER_EMAIL,USER_NAME,USER_NICKNAME, USER_INFO
+	}
+	public static String getRandomId(){
+		return UUID.randomUUID().toString();
 	}
 }

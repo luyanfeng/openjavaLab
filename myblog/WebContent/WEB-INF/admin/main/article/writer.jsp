@@ -1,24 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style type="text/css">
+.errorMessage li{ background-image: none;}
+</style>
 <div class="content-box-header">
   <h3>我的新文章</h3>
   <div class="clear"></div>
 </div>
 <div class="content-box-content">
   <div class="tab-content default-tab" id="tab1">
-    <div id="savefailure" style="display:none"  class="notification attention  png_bg"> 
+    <div id="savefailure" style="display:${display eq 1 ? '' :'none'}"  class="notification attention  png_bg"> 
     <a href="#" class="close"><img src="${applicationScope.path }/comm/admin/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
-      <div>这是条提示信息！</div>
+      <div><s:actionerror/> </div>
     </div>
     <FORM id="FMdata" action="" >
+    <input name="id" value="${result.id }" type="hidden"/>
 		<table>
 			<tr>
-				<td>标题：</td>
-				<td><input class="text-input small-input" type="text" name="title" value="${title }"/></td>
+				<td style="width:80px;">标题：</td>
+				<td style="width:500px"><input class="text-input small-input" type="text" name="title" value="${result.title }"/></td>
+				<td><span style="display:none" class="user_subul input-notification error png_bg"><s:fielderror fieldName="title"/></span></td>
 			</tr>
 			<tr>
 				<td valign="top" style="vertical-align: top;">内容：</td>
-				<td><textarea class="text-input textarea wysiwyg" id="content" name="content" cols="79" rows="15"></textarea></td>
+				<td><textarea class="text-input textarea wysiwyg" id="content" name="content" cols="79" rows="15">${result.content }</textarea></td>
+				<td><span style="display:none" class="user_subul input-notification error png_bg"><s:fielderror fieldName="content"/></span></td>
 			</tr>
+			<c:if test="${!empty result }">
+			<tr><td>更新时间</td><td colspan="2">${!empty result.updateTime ? result.updateTime : result.time }</td></tr>
+			</c:if>
 			<tr>
 				<td colspan="3"><a class="button savebutton">保存文章</a></td>
 			</tr>
@@ -34,13 +45,17 @@ $(".savebutton").click(function(){
 		data:$("#FMdata").serialize(),
 		type:"post",
 		success:function(o){
-			if(o.s){
-				alert("保存成功");
+			if(o.s == 1){
+				$("#savefailure div").html("已保存！");
+				$("#savefailure").removeClass("attention error").addClass("success").show();
+				$(".user_subul").hide();
+			}else if(o.s == 0){
+				$("#savefailure div").html("保存失败：请确认您的输入是正常的；不要耍我哦，我可是会生气的！");
+				$("#savefailure").removeClass("attention success").addClass("error").show();
 			}else{
-				$("#savefailure div").html("保存失败：请确认您的输入是正常的；不要耍我哦，我可是会生气的！")
-// 				.addClass("error")
-				;
-				$("#savefailure").show();
+				$(".content-box").html(o).find(".user_subul:not(:empty)").show();
+				$("#savefailure div").html("保存失败：请确认您的输入是正常的；不要耍我哦，我可是会生气的！");
+				$("#savefailure").removeClass("attention success").addClass("error").show();
 			}
 		}
 	});

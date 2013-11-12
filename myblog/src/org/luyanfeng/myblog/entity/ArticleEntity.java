@@ -20,7 +20,7 @@ public class ArticleEntity implements Serializable {
 	@Id
 	private String id;
 	@Column(nullable=false)
-	private String titile;
+	private String title;
 	@Column(nullable=false)
 	private String content;
 	private String tags;
@@ -29,17 +29,19 @@ public class ArticleEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
 	private String updateTime;
+	
+	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getTitile() {
-		return titile;
+	public String getTitle() {
+		return title;
 	}
-	public void setTitile(String titile) {
-		this.titile = titile;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getContent() {
 		return content;
@@ -73,14 +75,9 @@ public class ArticleEntity implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "ArticleEntity [id=" + id + ", titile=" + titile + ", content="
+		return "ArticleEntity [id=" + id + ", title=" + title + ", content="
 				+ content + ", tags=" + tags + ", author=" + author + ", time="
 				+ time + ", updateTime=" + updateTime + "]";
 	}
-	
-	
-	
-	
-
 
 }

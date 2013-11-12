@@ -20,25 +20,15 @@ public class LoginAction extends BasicAction<UserEntity> {
 	private LoginServiceIml service;
 
 	/**
-	 * 登陆页面 
+	 *  navigation：登陆页面 
 	 */
 	public String toLogin(){
 		return "toLogin";
 	}
 	/**
-	 * 登录处理器 
+	 * navigation： 后台首面转向
 	 */
 	public String login(){
-		UserEntity user = this.getModel();
-		boolean shouldLogin = service.shouldLogin(user.getUser(), user.getPasswd(), user.getEmail());
-		HttpSession session = this.getRequest().getSession(false);
-		if(shouldLogin){
-			session.setAttribute(GenericUtil.SessionInfo.USER_EMAIL.toString(), user.getEmail());
-			session.setAttribute(GenericUtil.SessionInfo.USER_INFO.toString(), user);
-		}else {
-			this.addActionError("用户不存在");
-			this.addFieldError("nouser", "用户不存在");
-		};
 		return SUCCESS;
 	}
 	/**
@@ -54,6 +44,16 @@ public class LoginAction extends BasicAction<UserEntity> {
 		}
 		if(StringUtils.isBlank(user.getEmail())){
 			this.addFieldError("email", "用户邮箱不能为空");
+		}
+		if(this.getFieldErrors().isEmpty()){
+			UserEntity user2 = this.service.getUser(user.getUser(), user.getPasswd(), user.getEmail());
+			HttpSession session = this.getRequest().getSession(false);
+			if(user2 != null){
+				session.setAttribute(GenericUtil.SessionInfo.USER_EMAIL.toString(), user2.getEmail());
+				session.setAttribute(GenericUtil.SessionInfo.USER_INFO.toString(), user2);
+			}else {
+				this.addActionError("用户信息不匹配，或着不存在");
+			};
 		}
 	}
 }

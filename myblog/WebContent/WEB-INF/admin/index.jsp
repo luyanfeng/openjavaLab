@@ -22,7 +22,7 @@
   <%@ include file="/WEB-INF/admin/main.jspf" %>
   	<div id="footer"> 
 		<small>
-		&#169; Copyright 2010 Your Company | Powered by <a href="#">admin templates</a> | <a href="#">Top</a> 
+		&#169; Copyright 2010 天空的歌 | Powered by <a href="#">芦艳峰</a> | <a href="#">Top</a> 
 		</small> 
 	</div>
    </div>

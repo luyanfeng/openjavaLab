@@ -28,21 +28,40 @@
             <result type="dispatcher" name="picture">/WEB-INF/home/{1}.jsp</result>
         </action>
     </package>
+    <package name="articlehome" namespace="/home/article" extends="home">
+    	<action name="detail" method="detail" class="articleAction">
+    		<result type="dispatcher" >/WEB-INF/home/article/detail.jsp</result>
+    	</action>
+    </package>
 
 <!-- 后台 -->
 	<package name="admin" namespace="/admin" extends="default">
+		<default-interceptor-ref name="authenic-stack" />
 		<action name="*" method="{1}" class="adminAction">
-        	<interceptor-ref name="loginStack" />
+        	<result type="json" name="json-quit" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
 			<result type="dispatcher" name="index">/WEB-INF/admin/{1}.jsp</result>
 		</action>
 	</package>
 	<!-- 文章 -->
 	<package name="article" namespace="/admin/article" extends="admin">
 		<action name="*" method="{1}" class="articleAction">
-			<result type="json" name="save" >
-				<param name="includeProperties ">jsonMap</param>
+			<result type="json" name="json-save" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="json" name="json-delete" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
 			</result>
 			<result type="dispatcher" >/WEB-INF/admin/main/article/{1}.jsp</result>
+			<result type="dispatcher" name="input">/WEB-INF/admin/main/article/writer.jsp</result>
 		</action>
 	</package>
+	
 </struts>

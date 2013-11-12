@@ -2,6 +2,7 @@ package org.luyanfeng.myblog.service.iml;
 
 import javax.annotation.Resource;
 
+import org.luyanfeng.myblog.dao.BasicDao;
 import org.luyanfeng.myblog.dao.iml.LoginDaoIml;
 import org.luyanfeng.myblog.entity.UserEntity;
 import org.springframework.stereotype.Service;
@@ -11,21 +12,27 @@ import org.springframework.stereotype.Service;
 public class LoginServiceIml extends BasicServiceIml<UserEntity> {
 
 	@Resource(name="loginDaoIml")
-	private LoginDaoIml dao;
-	
+	@Override
+	public void setDao(BasicDao<UserEntity> dao) {
+		super.setDao(dao);
+	}
 	public boolean isLogin(){
 		return false;
 	}
+	
 	/**
 	 * 得到一个注册用户
 	 */
 	public UserEntity getUser(String user, String passwd, String email){
-		return dao.getUser(user, passwd, email);
+		LoginDaoIml userDao = (LoginDaoIml)this.getDao();
+		System.out.println(userDao);
+		return userDao.getUser(user, passwd, email);
 	}
 	/**
 	 * 用户是否可以登陆 
 	 */
 	public boolean shouldLogin(String user, String passwd, String email){
-		return dao.shouldLogin(user, passwd, email);
+		LoginDaoIml userDao = (LoginDaoIml)this.getDao();
+		return userDao.shouldLogin(user, passwd, email);
 	}
 }

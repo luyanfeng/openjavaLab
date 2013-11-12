@@ -3,6 +3,7 @@ package org.luyanfeng.myblog.dao.iml;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.luyanfeng.myblog.dao.BasicDao;
@@ -36,9 +37,17 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 	
 
 	@Override
-	public T getOne(String id) {
-		T t = (T) this.getSession().get(this.getEntity().getSimpleName(), id);
-		return t;
+	public T getOne(String id) throws Exception {
+		try {
+			T t = null;
+			if (StringUtils.isNotBlank(id)) {
+				t = (T) this.getSession().get(this.getEntity(),	id);
+			}
+			return t;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("### getOne()方法出错！",e);
+		}
 	}
 
 	@Deprecated
@@ -49,15 +58,24 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 	}
 
 	@Override
-	public boolean delSome(String... ids) {
-		boolean result = true;
+	public boolean delSome(String... ids) throws Exception {
 		try {
-			this.getSession().delete(this.getEntity().getSimpleName(),this.getEntity());
+			boolean result = true;
+			try {
+				for(String id : ids){
+					String hql = "delete from "+this.getEntity().getSimpleName()+" as t where t.id = :id ";
+					this.getSession().createQuery(hql )
+					.setString("id", id)
+					.executeUpdate();
+				}
+			} catch (Exception e) {
+				result = false;
+				e.printStackTrace();
+			}
+			return result;
 		} catch (Exception e) {
-			result = false;
-			e.printStackTrace();
+			throw new Exception("### delSome()方法出错！",e);
 		}
-		return result;
 	}
 
 	@Override
@@ -81,8 +99,14 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 	}
 
 	@Override
-	public List<T> getPage(final int skip, final int limit) {
-		return this.getSession().createQuery("from "+getEntity().getSimpleName()).setMaxResults(limit).setFirstResult(skip).list();
+	public List<T> getPage(final int skip, final int limit) throws Exception {
+		try {
+			return this.getSession()
+					.createQuery("from " + getEntity().getSimpleName()).list();
+//					.setMaxResults(limit).setFirstResult(skip).list();
+		} catch (Exception e) {
+			throw new Exception("### 分页查询getPage()出错！",e);
+		}
 	}
 
 

@@ -17,15 +17,15 @@ public class AuthenticateInterceptor extends AbstractInterceptor  {
 		if(action instanceof LoginAction){// 登录功能例外
 			System.out.println("login....");
 		}else if(action instanceof ActionSupport){
+			System.out.println("限权对像："+action.getClass().getName());
 			String userEmail = (String) ai.getInvocationContext().getSession().get(GenericUtil.SessionInfo.USER_EMAIL.toString());
-			System.out.println(userEmail);
 			if(StringUtils.isNotBlank(userEmail)){
 				System.out.println("你已登录！！");
 				return ai.invoke();
 			}else{
-				
+				((ActionSupport)ai.getAction()).addActionError("你没有相应的权限");
+				return "error";
 			}
-			((ActionSupport)ai.getAction()).addActionError("你没有相应的权限");
 		}
 		return ai.invoke();
 	}
