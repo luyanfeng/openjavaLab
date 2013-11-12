@@ -36,5 +36,13 @@
 			<result type="dispatcher" name="index">/WEB-INF/admin/{1}.jsp</result>
 		</action>
 	</package>
-
+	<!-- 文章 -->
+	<package name="article" namespace="/admin/article" extends="admin">
+		<action name="*" method="{1}" class="articleAction">
+			<result type="json" name="save" >
+				<param name="includeProperties ">jsonMap</param>
+			</result>
+			<result type="dispatcher" >/WEB-INF/admin/main/article/{1}.jsp</result>
+		</action>
+	</package>
 </struts>

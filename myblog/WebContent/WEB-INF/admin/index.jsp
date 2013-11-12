@@ -18,8 +18,14 @@
   <div id="sidebar">
     <%@ include file="/WEB-INF/admin/nav.jspf" %>
   </div>
-  <!-- End #sidebar -->
+  <div id="main-content">
   <%@ include file="/WEB-INF/admin/main.jspf" %>
+  	<div id="footer"> 
+		<small>
+		&#169; Copyright 2010 Your Company | Powered by <a href="#">admin templates</a> | <a href="#">Top</a> 
+		</small> 
+	</div>
+   </div>
 </div>
 </body>
 <!-- Download From www.exet.tk-->
