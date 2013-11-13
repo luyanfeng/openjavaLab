@@ -1,6 +1,9 @@
 package org.luyanfeng.myblog.service.iml;
 
+import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.luyanfeng.myblog.dao.BasicDao;
 import org.luyanfeng.myblog.service.BasicService;
@@ -27,8 +30,8 @@ public class BasicServiceIml<T> implements BasicService<T> {
 		return this.dao.getSome(ids);
 	}
 	@Override
-	public List<T> getPage(int skip, int limit ) throws Exception {
-		return this.dao.getPage(skip, limit);
+	public List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap ) throws Exception {
+		return this.dao.getPage(skip, limit, sortMap);
 	}
 
 	@Override
@@ -44,6 +47,14 @@ public class BasicServiceIml<T> implements BasicService<T> {
 	@Override
 	public boolean saveAll(T... entity) {
 		return this.dao.saveAll(entity);
+	}
+	@Override
+	public Integer executeHql(String hql, Map<String, Serializable> parameters) throws Exception {
+		return this.dao.executeHql(hql, parameters);
+	}
+	@Override
+	public Integer executeLocalHql(String hql, Map<String, Serializable> parameters) throws Exception {
+		return this.dao.executeLocalHql(hql, parameters);
 	}
 
 }

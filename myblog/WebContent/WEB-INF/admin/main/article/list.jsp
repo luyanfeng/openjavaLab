@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<form id="queryParameter" style="display:none" action="">
+<input type="hidden" name="currentNum" value="${currentNum }" />
+<input type="hidden" name="totalNum" value="${totalNum }" />
+<input type="hidden" name="nav" value="${nav }" />
+</form>
 <div class="content-box-header">
   <h3>我的新文章</h3>
   <div class="clear"></div>
@@ -7,7 +12,7 @@
 <div class="content-box-content">
   <div class="tab-content default-tab" id="tab1">
       <!-- This is the target div. id must match the href of this div's tab -->
-      <div style="display:${display eq 1 ? '' :'none'} ;" class="notification attention png_bg"> <a href="#" class="close"><img src="${applicationScope.path }/comm/admin/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+      <div id="listmessage" style="display:${display eq 1 ? '' :'none'} ;" class="notification attention png_bg"> <a href="#" class="close"><img src="${applicationScope.path }/comm/admin/images/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
         <div><s:actionerror /><s:actionmessage/> </div>
       </div>
       <table>
@@ -25,14 +30,6 @@
         <tfoot>
           <tr>
             <td colspan="6">
-              <!-- <div class="bulk-actions align-left">
-                <select name="dropdown">
-                  <option value="option1">Choose an action...</option>
-                  <option value="option2">Edit</option>
-                  <option value="option3">Delete</option>
-                </select>
-                <a class="button" href="#">选定</a> 
-               </div> -->
               <div class="pagination"> 
                <a href="#" title="First Page">&laquo; 首页</a>
                <a href="#" title="Previous Page">&laquo; 前一页</a>
@@ -51,9 +48,9 @@
             <td><input type="checkbox" /></td>
             <td><a href="${applicationScope.path}/home/article/detail.jap?id=${article.id}" target="_blank" ><s:property value="#article.title"/></a></td>
             <td>${empty article.updateTime ? article.time : article.updateTime}</td>
-            <td>456</td>
-            <td>1501</td>
-            <td><a href="javascript:void(0)">不可评论</a></td>
+            <td>${article.readtimes }&nbsp;</td>
+            <td>${article.reviewtimes }&nbsp;</td>
+            <td><a href="javascript:void(0)" onclick="switchopen('${article.id}')">${article.open ? '可以评论' :'禁止评论'}</a></td>
             <td>
               <a href="javascript:void(0)" onclick="writer_('${article.id}')" title="Edit"><img src="${applicationScope.path }/comm/admin/images/icons/pencil.png" alt="Edit" /></a> 
               <a href="javascript:void(0)" onclick="delete_('${article.id}','${article.title }')" title="Delete"><img src="${applicationScope.path }/comm/admin/images/icons/cross.png" alt="Delete" /></a> 

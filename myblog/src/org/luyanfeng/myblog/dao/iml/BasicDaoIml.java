@@ -1,9 +1,12 @@
 package org.luyanfeng.myblog.dao.iml;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.luyanfeng.myblog.dao.BasicDao;
@@ -99,13 +102,55 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 	}
 
 	@Override
-	public List<T> getPage(final int skip, final int limit) throws Exception {
+	public List<T> getPage(final int skip, final int limit, LinkedHashMap<String,Integer> sortMap) throws Exception {
 		try {
+			String sortstr = "";
+			if(sortMap != null && !sortMap.isEmpty()){
+				sortstr = " ORDER BY ";
+				int tempi = 0;
+				for(Map.Entry<String, Integer> sort : sortMap.entrySet()){
+					if(tempi != 0){
+						sortstr += ",";
+					}
+					sortstr += "t."+sort.getKey()+ ( sort.getValue() == null || sort.getValue() > 0 ? " ASC " : " DESC " );
+				}
+			}
 			return this.getSession()
-					.createQuery("from " + getEntity().getSimpleName()).list();
-//					.setMaxResults(limit).setFirstResult(skip).list();
+					.createQuery("FROM " + getEntity().getSimpleName() + " AS t" + sortstr )
+					.setMaxResults(limit).setFirstResult(skip)
+					.list()
+					;
 		} catch (Exception e) {
 			throw new Exception("### 分页查询getPage()出错！",e);
+		}
+	}
+	@Override
+	public Integer executeHql(String hql,Map<String,Serializable> parameters) throws Exception {
+		try {
+			Query query = this.getSession().createQuery(hql);
+			if(parameters != null && !parameters.isEmpty()){
+				for(Map.Entry<String, Serializable> p : parameters.entrySet()){
+					query.setSerializable(p.getKey(), p.getValue());
+				}
+			}
+			return query.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception("### HQL执行器出了问题 ！",e);
+		}
+	}
+	@Override
+	public Integer executeLocalHql(String sql, Map<String, Serializable> parameters) throws Exception {
+		try {
+			this.getSession().clear();
+			Query query = this.getSession().createSQLQuery(sql).addEntity(this.getEntity());
+			if(parameters != null && !parameters.isEmpty()){
+				for(Map.Entry<String, Serializable> p : parameters.entrySet()){
+					query.setSerializable(p.getKey(), p.getValue());
+				}
+			}
+			return query.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception("### SQL执行器出了问题 ！",e);
 		}
 	}
 

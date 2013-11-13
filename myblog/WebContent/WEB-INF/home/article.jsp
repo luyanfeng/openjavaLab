@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,24 +29,20 @@
       </div>		
 	
       <div id="content">
-        <div class="content_item">
-          <h2>Latest Projects</h2>
-            <div class="content_container">       
-			  <h3>Example 1</h3>
-			  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien vel orci posuere tristique quis vitae nisi. Sed porta venenatis auctor. Fusce iaculis ligula odio.</p>
-            </div><!--close content_container-->
-            <div class="content_container">			  
-			  <h3>Example 2</h3>
-			  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien vel orci posuere tristique quis vitae nisi. Sed porta venenatis auctor. Fusce iaculis ligula odio.</p>
-			</div><!--close content_container-->
-            <div class="content_container">       
-			  <h3>Example 1</h3>
-			  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien vel orci posuere tristique quis vitae nisi. Sed porta venenatis auctor. Fusce iaculis ligula odio.</p>
-            </div><!--close content_container-->
-            <div class="content_container">			  
-			  <h3>Example 2</h3>
-			  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien vel orci posuere tristique quis vitae nisi. Sed porta venenatis auctor. Fusce iaculis ligula odio.</p>
-			</div><!--close content_container-->
+        <div class="content_item ">
+          <h2 >最近的文章</h2>
+          <c:forEach items="${requestScope.results }" var="article" varStatus="vs">
+            <div class="content_container ">       
+			  <h3>" <c:out value="${article.title }" /> "</h3>
+			  <div style="color:#fff;font-size :100% ;color:#999;border-bottom : 1px dotted #666; padding-bottom: 10px;" >
+			  <c:choose>
+			   <c:when test="${fn:length(article.content) lt 100 }">article.content</c:when>
+			  <c:otherwise>${fn:substring(article.content, 0 , 100) }...</c:otherwise>
+			  </c:choose>
+			  <a href="${applicationScope.path}/home/article/detail.jap?id=${article.id}" target="_blank" style="font-weight:normal; float: right;clear: both;color:#ECEFF4;font-size: 0.9em;">&gt;&gt;&gt;阅读</a>
+			  </div>
+            </div>
+          </c:forEach>
 	    </div><!--close content_item-->
       </div><!--close content-->   
 	</div><!--close site_content--> 

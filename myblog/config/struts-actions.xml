@@ -49,6 +49,11 @@
 	<!-- 文章 -->
 	<package name="article" namespace="/admin/article" extends="admin">
 		<action name="*" method="{1}" class="articleAction">
+			<result type="json" name="json-switchReview" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
 			<result type="json" name="json-save" >
 				<param name="root">jsonMap</param>
  				<param name="noCache">true</param>

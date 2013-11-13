@@ -18,17 +18,21 @@ public class ArticleEntity implements Serializable {
 	private static final long serialVersionUID = 5786852236479125353L;
 	
 	@Id
-	private String id;
+	private String id;				// 统一主键 
 	@Column(nullable=false)
-	private String title;
-	@Column(nullable=false,length=1000)
-	private String content;
-	private String tags;
+	private String title;			// 标题
 	@Column(nullable=false)
-	private String author;
+	private String content;			// 内容 
+	private Integer readtimes = 0;		// 阅读次数
+	private Integer reviewtimes = 0;		// 评论次数
+	private boolean isOpen;			// 开放性/可评论性
+	private String tags;			// 标签，用空格隔开
+	private String types;			// 分类，用空格隔开
+	@Column(nullable=false)
+	private String author;			// 作者
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date time;
-	private String updateTime;
+	private Date time;				// 创建时间
+	private String updateTime;		// 更新时间
 	
 	
 	public String getId() {
@@ -73,11 +77,38 @@ public class ArticleEntity implements Serializable {
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
+	public Integer getReadtimes() {
+		return readtimes;
+	}
+	public void setReadtimes(Integer readtimes) {
+		this.readtimes = readtimes;
+	}
+	public Integer getReviewtimes() {
+		return reviewtimes;
+	}
+	public void setReviewtimes(Integer reviewtimes) {
+		this.reviewtimes = reviewtimes;
+	}
+	public boolean isOpen() {
+		return isOpen;
+	}
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
+	}
+	
+	public String getTypes() {
+		return types;
+	}
+	public void setTypes(String types) {
+		this.types = types;
+	}
 	@Override
 	public String toString() {
 		return "ArticleEntity [id=" + id + ", title=" + title + ", content="
-				+ content + ", tags=" + tags + ", author=" + author + ", time="
-				+ time + ", updateTime=" + updateTime + "]";
+				+ content + ", readtimes=" + readtimes + ", reviewtimes="
+				+ reviewtimes + ", isOpen=" + isOpen + ", tags=" + tags
+				+ ", types=" + types + ", author=" + author + ", time=" + time
+				+ ", updateTime=" + updateTime + "]";
 	}
 
 }

@@ -110,4 +110,41 @@ function delete_(id,name){
 		});
 	}
 }
+// 评论开关
+function switchopen(id){
+	if(id){
+		$.ajax({
+			type:"post",
+			data:{"id":id},
+			url:"${applicationScope.path }/admin/article/switchReview.jap",
+			success:function(o){
+				if(o.s == 1){
+					getDateList();
+				}else{
+					$("#listmessage div").html("网络不给力，请稍后再试");
+					$("#listmessage").show();
+				}
+			}
+		});
+	}
+}
+// 加载数据
+function getDateList(){
+	if(id){
+		$.ajax({
+			type:"post",
+			data: $("#queryParameter").size() == 1 ? $("#queryParameter").serialzie() : "",
+			url:"${applicationScope.path }/admin/article/list.jap",
+			beforeSend:function(){
+				$(".content-box").html("<h1>系统正在给力的为您加载组件....</h1>");
+			},
+			error:function(){
+				alert("网络不给力，加载不了了....");
+			},
+			success:function(o){
+				$(".content-box").html(o);
+			}
+		});
+	}
+}
 </script>

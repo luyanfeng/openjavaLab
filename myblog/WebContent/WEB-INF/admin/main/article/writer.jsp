@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
-.errorMessage li{ background-image: none;}
+.errorMessage li{ background-image: none; }
 </style>
 <div class="content-box-header">
   <h3>我的新文章</h3>
@@ -18,17 +18,20 @@
     <input name="id" value="${result.id }" type="hidden"/>
 		<table>
 			<tr>
-				<td style="width:80px;">标题：</td>
-				<td style="width:500px"><input class="text-input small-input" type="text" name="title" value="${result.title }"/></td>
+				<td style="width:80px;text-align: right">标题：</td>
+				<td style="width:500px;"><input class="text-input " type="text" name="title" value="${result.title }"/><span style="color:red;margin-left:5px;font-size:1.2em;">*</span></td>
 				<td><span style="display:none" class="user_subul input-notification error png_bg"><s:fielderror fieldName="title"/></span></td>
 			</tr>
 			<tr>
-				<td valign="top" style="vertical-align: top;">内容：</td>
-				<td><textarea class="text-input textarea wysiwyg" id="content" name="content" cols="79" rows="15">${result.content }</textarea></td>
-				<td><span style="display:none" class="user_subul input-notification error png_bg"><s:fielderror fieldName="content"/></span></td>
+				<td valign="top" style="vertical-align: top;text-align: right">内容：</td>
+				<td><textarea class="text-input textarea wysiwyg" id="content" name="content" cols="79" rows="15">${result.content }</textarea><span style="color:red;margin-left:5px;font-size:1.2em;vertical-align: top; ">*</span></td>
+				<td><span style="display:none;" class="user_subul input-notification error png_bg"><s:fielderror fieldName="content"/></span></td>
 			</tr>
+			
+			<tr><td style="text-align: right">标签：</td><td><input type="text" name="tags" value="${article.tags }" class="text-input " style="width:99%"/></td><td><span style="color:#999">（多个标签之间用","分隔）</span></td></tr>			
+			<tr><td style="text-align: right">个人分类：</td><td><input type="text" name="types" value="${article.tags }" class="text-input " style="width:99%"/></td><td><span style="color:#999">（多个分类之间用","分隔）</span></td></tr>			
 			<c:if test="${!empty result }">
-			<tr><td>更新时间</td><td colspan="2">${!empty result.updateTime ? result.updateTime : result.time }</td></tr>
+			<tr><td style="text-align: right">更新时间：</td><td colspan="2">${!empty result.updateTime ? result.updateTime : result.time }</td></tr>
 			</c:if>
 			<tr>
 				<td colspan="3"><a class="button savebutton">保存文章</a></td>

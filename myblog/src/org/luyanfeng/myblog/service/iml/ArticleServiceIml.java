@@ -15,6 +15,4 @@ public class ArticleServiceIml extends BasicServiceIml<ArticleEntity> {
 		super.setDao(dao);
 	}
 
-	
-
 }
