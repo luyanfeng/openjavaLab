@@ -21,7 +21,7 @@ public class ArticleEntity implements Serializable {
 	private String id;
 	@Column(nullable=false)
 	private String title;
-	@Column(nullable=false)
+	@Column(nullable=false,length=1000)
 	private String content;
 	private String tags;
 	@Column(nullable=false)
