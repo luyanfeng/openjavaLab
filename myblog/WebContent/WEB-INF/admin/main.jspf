@@ -35,7 +35,7 @@
    <div class="clear"></div>
    <!-- End .clear -->
    <div class="content-box">
-     <%@ include file="/WEB-INF/admin/main/default.jsp" %>
+<%--      <%@ include file="/WEB-INF/admin/main/default.jsp" %> --%>
    </div>
    <!-- End .content-box -->
    
@@ -68,6 +68,8 @@
    
    <div class="clear"></div>
 <script type="text/javascript">
+// 
+getDateList();
 // 编辑
 function writer_(id){
 	if(id){
@@ -128,23 +130,85 @@ function switchopen(id){
 		});
 	}
 }
-// 加载数据
-function getDateList(){
+// 显隐开关
+function switchHidden(id){
 	if(id){
 		$.ajax({
 			type:"post",
-			data: $("#queryParameter").size() == 1 ? $("#queryParameter").serialzie() : "",
-			url:"${applicationScope.path }/admin/article/list.jap",
-			beforeSend:function(){
-				$(".content-box").html("<h1>系统正在给力的为您加载组件....</h1>");
-			},
-			error:function(){
-				alert("网络不给力，加载不了了....");
-			},
+			data:{"id":id},
+			url:"${applicationScope.path }/admin/type/switchHidden.jap",
 			success:function(o){
-				$(".content-box").html(o);
+				if(o.s == 1){
+					$.ajax({
+						type:"post",
+						data: $("#queryParameter").size() == 1 ? $("#queryParameter").serialize() : "",
+						url:"${applicationScope.path }/admin/article/types.jap",
+						beforeSend:function(){
+							$(".content-box").html("<h1>系统正在给力的为您加载组件....</h1>");
+						},
+						error:function(){
+							alert("网络不给力，加载不了了....");
+						},
+						success:function(o){
+							$(".content-box").html(o);
+						}
+					});
+				}else{
+					$("#listmessage div").html("网络不给力，请稍后再试");
+					$("#listmessage").show();
+				}
 			}
 		});
+	}
+}
+// 加载数据
+function getDateList(){
+	$.ajax({
+		type:"post",
+		data: $("#queryParameter").size() == 1 ? $("#queryParameter").serialize() : "",
+		url:"${applicationScope.path }/admin/article/list.jap",
+		beforeSend:function(){
+			$(".content-box").html("<h1>系统正在给力的为您加载组件....</h1>");
+		},
+		error:function(){
+			alert("网络不给力，加载不了了....");
+		},
+		success:function(o){
+			$(".content-box").html(o);
+		}
+	});
+}
+// 修改类型
+function modifyType(id){
+	if(id){
+		$("#"+id).hide();
+		$("#"+id).siblings("div").find("input").val( $("#"+id).parents("td").attr("_name"));
+		$("#"+id).siblings("div").show();
+	}else{
+		alert("怎么回事");
+	}
+}
+function cannelModify(id){
+	if(id ){
+		var va = $("#"+id).parents("td").attr("_name");
+		$("#"+id).text(va  ? va : "");
+		$("#"+id).show();
+		$("#"+id).siblings("div").find("input").val( $("#"+id).parents("td").attr("_name") );
+		$("#"+id).siblings("div").hide();
+	}
+}
+function submitModify(id){
+	if(id ){
+		$.ajax({
+			url:"${applicationScope.path}/admin/article/modifyType.jap",
+			type:"post",
+			data:{"name":$("#"+id).find("input").val()},
+			success:function(o){
+				cannelModify(id);
+			}
+		});
+	}else{
+		alert("请正确输入！");
 	}
 }
 </script>

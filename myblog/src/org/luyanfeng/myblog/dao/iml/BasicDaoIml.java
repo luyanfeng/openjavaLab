@@ -130,7 +130,7 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 			Query query = this.getSession().createQuery(hql);
 			if(parameters != null && !parameters.isEmpty()){
 				for(Map.Entry<String, Serializable> p : parameters.entrySet()){
-					query.setSerializable(p.getKey(), p.getValue());
+					query.setString(p.getKey(), (String) p.getValue());
 				}
 			}
 			return query.executeUpdate();
@@ -142,13 +142,14 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 	public Integer executeLocalHql(String sql, Map<String, Serializable> parameters) throws Exception {
 		try {
 			this.getSession().clear();
-			Query query = this.getSession().createSQLQuery(sql).addEntity(this.getEntity());
+			Query query = this.getSession().createSQLQuery(sql);
 			if(parameters != null && !parameters.isEmpty()){
 				for(Map.Entry<String, Serializable> p : parameters.entrySet()){
-					query.setSerializable(p.getKey(), p.getValue());
+					query.setString(p.getKey(),  (String) p.getValue());
 				}
 			}
-			return query.executeUpdate();
+			int executeUpdate = query.executeUpdate();
+			return executeUpdate;
 		} catch (Exception e) {
 			throw new Exception("### SQL执行器出了问题 ！",e);
 		}

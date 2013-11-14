@@ -19,19 +19,27 @@
           <tr>
             <th>类型</th>
             <th style="text-align:center">时间</th>
-            <th style="text-align:center">文章</th>
+            <th style="text-align:center">文章数</th>
             <th style="text-align:center">操作</th>
           </tr>
         </thead>
         <tbody>
         <s:iterator status="vs" value="list" var="type">
           <tr>
-            <td></td>
-            <td>${empty article.updateTime ? article.time : article.updateTime}</td>
-            <td>${article.readtimes }&nbsp;</td>
-            <td>${article.reviewtimes }&nbsp;</td>
-            <td><a href="javascript:void(0)" onclick="switchopen('${article.id}')">${article.open ? '可以评论' :'禁止评论'}</a></td>
-            <td>
+            <td _name="<s:property value="#type.name "/>">
+            	<a href="javascript:void(0)" id="${type.id}" onclick="modifyType('${type.id}')" ><s:property value="#type.name "/></a>
+            	<div style="display:none">
+            	<input type='text'  name='name' value='<s:property value="#type.name "/>' class='text-input'/>
+            	<a href='javascript:void(0)' onclick="submitModify('${type.id}')" >确认</a>
+            	<a href="javascript:void(0)" onclick="cannelModify('${type.id}')" >取消</a>
+            	</div>
+            	
+            </td>
+            <td style="text-align:center"><s:property value="#type.time "/>&nbsp;</td>
+            <td style="text-align:center"><s:property value="#type.quantity "/>&nbsp;</td>
+            <td style="text-align:center">
+            <a href="javascript:void(0)" onclick="switchHidden('${type.id}')">${type.hidden ? '显示' :'隐藏'}</a> | 
+            <a href="javascript:void(0)" onclick="deleteType('${type.id}')">删除</a>
             </td>
           </tr>
           </s:iterator>

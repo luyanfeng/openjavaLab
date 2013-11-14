@@ -64,8 +64,33 @@
  				<param name="noCache">true</param>
  				<param name="excludeNullProperties">true</param> 
 			</result>
+			<result type="chain" name="forward-types" >
+				<param name="actionName">list</param>
+				<param name="namespace">/admin/type</param>
+			</result>
 			<result type="dispatcher" >/WEB-INF/admin/main/article/{1}.jsp</result>
 			<result type="dispatcher" name="input">/WEB-INF/admin/main/article/writer.jsp</result>
+		</action>
+	</package>
+	<!-- 类型 -->
+	<package name="type" namespace="/admin/type" extends="admin">
+		<action name="*" method="{1}" class="typeAction">
+			<result type="json" name="json-save" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="json" name="json-delete" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="json" name="json-switchHidden" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="dispatcher" >/WEB-INF/admin/main/type/{1}.jsp</result>
 		</action>
 	</package>
 	

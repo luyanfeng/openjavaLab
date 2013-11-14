@@ -47,22 +47,11 @@ public class ArticleAction extends BasicAction<ArticleEntity> {
 	private Map<String,Object> jsonMap = new LinkedHashMap<>();
 	
 	/**
-	 *	类型管理 
+	 *  navigation : 类型管理
 	 */
 	public String types(){
-		try {
-			this.getRequest().setAttribute("display", 0);
-			this.getSortMap().put("time", -1);
-			List<TypeEntity> page = this.typeService.getPage(skip, limit, sortMap);
-			this.getList().addAll(page);
-		} catch (Exception e) {
-			this.getRequest().setAttribute("display", 1);
-			e.printStackTrace();
-			this.addActionError("服务器忙，请稍后再试！"+e.getMessage());
-		}
-		return SUCCESS;
+		return "forward-types";
 	}
-	
 	
 	/**
 	 *  评论开关

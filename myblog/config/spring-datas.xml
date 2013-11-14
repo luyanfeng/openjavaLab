@@ -62,20 +62,22 @@
 	<bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+<!-- 	<aop:aspectj-autoproxy proxy-target-class="true"/> -->
 	<aop:config proxy-target-class="true">
-		<aop:pointcut expression="execution(* org.luyanfeng.myblog.service.iml.*Iml.*(..) )" id="serviceMethods"/>
+		<aop:pointcut expression="execution(* org.luyanfeng.myblog.service.iml.*.*(..) )" id="serviceMethods"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
 	</aop:config>
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="get*" propagation="REQUIRED" read-only="true"/>		
-			<tx:method name="is*" propagation="REQUIRED" read-only="true"/>
-			<tx:method name="del*" propagation="REQUIRED" read-only="false"/>
-			<tx:method name="add*" propagation="REQUIRED" read-only="false"/>
-			<tx:method name="save*" propagation="REQUIRED" read-only="false"/>
-			<tx:method name="shouldLogin" propagation="REQUIRED" read-only="true"/>
-			<tx:method name="execute*" propagation="REQUIRED" read-only="false"/>
-			<tx:method name="*" propagation="REQUIRED" read-only="true"/>
+			<tx:method name="del*" 			propagation="REQUIRED" read-only="false"/>
+			<tx:method name="add*" 			propagation="REQUIRED" read-only="false"/>
+			<tx:method name="save*" 		propagation="REQUIRED" read-only="false"/>
+			<tx:method name="execute*" 		propagation="REQUIRED" read-only="false"/>
+			
+			<tx:method name="get*" 			propagation="REQUIRED" read-only="true"/>		
+			<tx:method name="is*" 			propagation="REQUIRED" read-only="true"/>
+			<tx:method name="shouldLogin" 	propagation="REQUIRED" read-only="true"/>
+<!-- 			<tx:method name="*" propagation="REQUIRED" read-only="true"/> -->
 		</tx:attributes>
 	</tx:advice>
 </beans>
