@@ -1,19 +1,14 @@
 package org.luyanfeng.myblog.action.admin;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import org.luyanfeng.myblog.action.BasicAction;
+import org.luyanfeng.myblog.action.BasicActionExt;
 import org.luyanfeng.myblog.entity.UserEntity;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 @Controller("adminAction")
 @Scope("prototype")
-public class AdminAction extends BasicAction<UserEntity>{
+public class AdminAction extends BasicActionExt<UserEntity>{
 	private static final long serialVersionUID = 1L;
-	private Map<String,Object> jsonMap = new LinkedHashMap<>();;
-	
 	/** 导航 后期做成枚举*/
 	private String nav;
 	/**
@@ -42,11 +37,4 @@ public class AdminAction extends BasicAction<UserEntity>{
 	public void setNav(String nav) {
 		this.nav = nav;
 	}
-	public Map<String, Object> getJsonMap() {
-		return jsonMap;
-	}
-	public void setJsonMap(Map<String, Object> jsonMap) {
-		this.jsonMap = jsonMap;
-	}
-	
 }

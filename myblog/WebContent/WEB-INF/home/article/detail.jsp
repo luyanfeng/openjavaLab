@@ -30,8 +30,8 @@
         <div class="content_item" style="width:100%;">
           <h2 style="text-align:center">${result.title }</h2>
             <div class="content_container" style="width:100%">       
-            <h6 style="text-align:center">作者：${result.author } 时间：${result.time } 阅读次数：${result.readtimes } [${article.open ? '可以评论' :'禁止评论'}]</h6>
-            <div style="color: #fff">${result.content }</div>
+            <h6 style="text-align:center">作者：${result.author } 时间：${result.time } 阅读次数：${result.readtimes } [${result.open ? '可以评论' :'禁止评论'}]</h6>
+            <div style="color: #dedede;line-height: 20px;text-indent:2em ">${result.content }</div>
 		 	</div>
 	    </div><!--close content_item-->
       </div><!--close content-->   

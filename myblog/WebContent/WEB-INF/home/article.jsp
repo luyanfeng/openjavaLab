@@ -34,12 +34,12 @@
           <c:forEach items="${requestScope.results }" var="article" varStatus="vs">
             <div class="content_container ">       
 			  <h3>" <c:out value="${article.title }" /> "</h3>
-			  <div style="color:#fff;font-size :100% ;color:#999;border-bottom : 1px dotted #666; padding-bottom: 10px;" >
+			  <div style="color:#999;text-indent:2em ; font-size :100% ;border-bottom : 1px dotted #666; padding-bottom: 25px;" >
 			  <c:choose>
 			   <c:when test="${fn:length(article.content) lt 100 }">article.content</c:when>
 			  <c:otherwise>${fn:substring(article.content, 0 , 100) }...</c:otherwise>
 			  </c:choose>
-			  <a href="${applicationScope.path}/home/article/detail.jap?id=${article.id}" target="_blank" style="font-weight:normal; float: right;clear: both;color:#ECEFF4;font-size: 0.9em;">&gt;&gt;&gt;阅读</a>
+			  <div><a href="${applicationScope.path}/home/article/detail.jap?id=${article.id}" target="_blank" style="clear:both;font-weight:normal; float: right;clear: both;color:#ECEFF4;font-size: 0.9em;">&gt;&gt;&gt;阅读</a></div>
 			  </div>
             </div>
           </c:forEach>

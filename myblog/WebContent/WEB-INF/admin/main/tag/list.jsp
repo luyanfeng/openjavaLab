@@ -6,7 +6,7 @@
 <input type="hidden" name="nav" value="${nav }" />
 </form>
 <div class="content-box-header">
-  <h3>类型管理</h3>
+  <h3>标签管理</h3>
   <div class="clear"></div>
 </div>
 <div class="content-box-content">
@@ -17,29 +17,29 @@
       <table>
         <thead>
           <tr>
-            <th>类型</th>
+            <th>标签</th>
             <th style="text-align:center">时间</th>
             <th style="text-align:center">文章数</th>
             <th style="text-align:center">操作</th>
           </tr>
         </thead>
         <tbody>
-        <s:iterator status="vs" value="list" var="type">
+        <s:iterator status="vs" value="list" var="tag">
           <tr>
-            <td _name="<s:property value="#type.name " />">
-            	<a href="javascript:void(0)" id="${type.id}" onclick="modifyType('${type.id}')" ><s:property value="#type.name "/></a>
-            	<div style="display:none" >
-            	<input type='text'  name='name' value='<s:property value="#type.name "/>' class='text-input'/>
-            	<a href='javascript:void(0)' onclick="submitModify('${type.id}')" >确认</a>
-            	<a href="javascript:void(0)" onclick="cannelModify('${type.id}')" >取消</a>
+            <td _name="<s:property value="#tag.name "/>">
+            	<a href="javascript:void(0)" id="${tag.id}" onclick="modifytag('${tag.id}')" ><s:property value="#tag.name "/></a>
+            	<div style="display:none">
+            	<input type='text'  name='name' value='<s:property value="#tag.name "/>' class='text-input'/>
+            	<a href='javascript:void(0)' onclick="submitModify('${tag.id}')" >确认</a>
+            	<a href="javascript:void(0)" onclick="cannelModify('${tag.id}')" >取消</a>
             	</div>
             	
             </td>
-            <td style="text-align:center"><s:property value="#type.time "/>&nbsp;</td>
-            <td style="text-align:center"><s:property value="#type.quantity "/>&nbsp;</td>
+            <td style="text-align:center"><s:property value="#tag.time "/>&nbsp;</td>
+            <td style="text-align:center"><s:property value="#tag.quantity "/>&nbsp;</td>
             <td style="text-align:center">
-            <a href="javascript:void(0)" onclick="switchHidden('${type.id}')">${type.hidden ? '显示' :'隐藏'}</a> | 
-            <a href="javascript:void(0)" onclick="deleteType('${type.id}')">删除</a>
+            <a href="javascript:void(0)" onclick="switchHidden('${tag.id}')">${tag.hidden ? '显示' :'隐藏'}</a> | 
+            <a href="javascript:void(0)" onclick="deletetag('${tag.id}')">删除</a>
             </td>
           </tr>
           </s:iterator>
@@ -48,12 +48,12 @@
     </div>
  </div>
 <script type="text/javascript">
-// 加载数据
-function initTypes(){
+//加载数据
+function initTags(){
 	$.ajax({
 		type:"post",
 		data: $("#queryParameter").size() == 1 ? $("#queryParameter").serialize() : "",
-		url:"${applicationScope.path }/admin/article/types.jap",
+		url:"${applicationScope.path }/admin/article/tags.jap",
 		beforeSend:function(){
 			$(".content-box").html("<h1>系统正在给力的为您加载组件....</h1>");
 		},
@@ -68,12 +68,12 @@ function initTypes(){
 /**
  * 删除
  */
-function deleteType(id){
+function deletetag(id){
 	if(id){
 		$.ajax({
 			type:"post",
 			data:{"id":id},
-			url:"${applicationScope.path }/admin/type/delete.jap",
+			url:"${applicationScope.path }/admin/tag/delete.jap",
 			success:function(o){
 				if(o.s == 1){
 					initTags();
@@ -93,10 +93,10 @@ function switchHidden(id){
 		$.ajax({
 			type:"post",
 			data:{"id":id},
-			url:"${applicationScope.path }/admin/type/switchHidden.jap",
+			url:"${applicationScope.path }/admin/tag/switchHidden.jap",
 			success:function(o){
 				if(o.s == 1){
-					initTypes();
+					initTags();
 				}else{
 					$("#listmessage div").html("网络不给力，请稍后再试");
 					$("#listmessage").show();
@@ -106,7 +106,7 @@ function switchHidden(id){
 	}
 }
 // 修改类型事件
-function modifyType(id){
+function modifytag(id){
 	if(id){
 		$("#"+id).hide();
 		$("#"+id).siblings("div").find("input").val( $("#"+id).parents("td").attr("_name"));
@@ -134,11 +134,11 @@ function submitModify(id){
 	if(id && $("#"+id).siblings("div").find("input").val() ){
 		var inputval = $("#"+id).siblings("div").find("input").val();
 		$.ajax({
-			url:"${applicationScope.path}/admin/type/save.jap",
+			url:"${applicationScope.path}/admin/tag/save.jap",
 			type:"post",
-			data:{"name":inputval ? inputval : "" ,"id":id},
+			data:{"name": inputval ? inputval : "" ,"id":id},
 			success:function(o){
-				initTypes();
+				initTags();
 			}
 		});
 	}else{

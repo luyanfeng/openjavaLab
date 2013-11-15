@@ -4,19 +4,16 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.ServletActionContext;
-import org.luyanfeng.myblog.action.BasicAction;
+import org.luyanfeng.myblog.action.BasicActionExt;
 import org.luyanfeng.myblog.entity.UserEntity;
 import org.luyanfeng.myblog.service.iml.LoginServiceIml;
 import org.luyanfeng.myblog.util.GenericUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionContext;
-
 @Controller("loginAction")
 @Scope("prototype")
-public class LoginAction extends BasicAction<UserEntity> {
+public class LoginAction extends BasicActionExt<UserEntity> {
 	private static final long serialVersionUID = 1L;
 	
 	@Resource(name="loginServiceIml")

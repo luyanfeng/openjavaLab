@@ -5,17 +5,21 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.luyanfeng.myblog.entity.TypeEntity;
+
 public interface BasicService<T> {
 	
 	public T getOne(String id) throws Exception;
 	
 	public List<T> getSome(String... ids);
 	
+	public List<TypeEntity> getAll()throws Exception;
+	
 	public boolean delSome(String ... ids) throws Exception;
 	
 	public boolean addOne(T t);
 	
-	public boolean saveAll(T... entity);
+	public boolean saveAll(T... entity) throws Exception;
 	
 	List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap) throws Exception;
 

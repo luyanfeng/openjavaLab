@@ -9,23 +9,20 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.luyanfeng.myblog.action.BasicActionExt;
+import org.luyanfeng.myblog.entity.TagEntity;
 import org.luyanfeng.myblog.entity.TypeEntity;
-import org.luyanfeng.myblog.service.iml.TypeServcieIml;
+import org.luyanfeng.myblog.service.iml.TagServcieIml;
 import org.luyanfeng.myblog.util.GenericUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-@Controller("typeAction")
+@Controller("tagAction")
 @Scope("prototype")
-public class TypeAction extends BasicActionExt<TypeEntity> {
+public class TagAction extends BasicActionExt<TagEntity> {
 	private static final long serialVersionUID = 1L;
 
-	@Resource(name="typeServcieIml")
-	private TypeServcieIml typeService;
-	
-	// parameters
-	private Integer skip = 0;
-	private Integer limit = 10;
+	@Resource(name="tagServcieIml")
+	private TagServcieIml tagServcie;
 	
 	/**
 	 *	显隐开关
@@ -35,7 +32,7 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 			this.getJsonMap().put("s", 0);
 			Map<String, Serializable> parameters = new HashMap<>();
 			parameters.put("id", this.getModel().getId());
-			Integer ok = this.typeService.executeLocalHql("update bl_type set isHidden=isHidden^1 where id=:id", parameters );
+			Integer ok = this.tagServcie.executeHql("UPDATE "+this.getModel().getClass().getSimpleName()+" SET isHidden=isHidden^1 WHERE id=:id", parameters );
 			if(ok > 0) this.getJsonMap().put("s", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,13 +41,12 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 		return "json-switchHidden";
 	}
 	/**
-	 *	类型管理 
+	 *	标签管理 
 	 */
 	public String list(){
 		try {
 			this.getRequest().setAttribute("display", 0);
-			this.getSortMap().put("time", -1);
-			List<TypeEntity> page = this.typeService.getPage(skip, limit, this.getSortMap());
+			List<TypeEntity> page = this.tagServcie.getAll();
 			this.setList(page);
 		} catch (Exception e) {
 			this.getRequest().setAttribute("display", 1);
@@ -64,7 +60,7 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 	 */
 	public String delete(){
 		try {
-			boolean delSome = this.typeService.delSome(this.getModel().getId());
+			boolean delSome = this.tagServcie.delSome(this.getModel().getId());
 			this.getJsonMap().put("s", delSome? 1 : 0 );
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,7 +76,8 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 			Map<String, Serializable> parameters = new HashMap<>();
 			parameters.put("id", this.getModel().getId());
 			parameters.put("name", this.getModel().getName());
-			Integer executeHql = this.typeService.executeHql("UPDATE "+this.getModel().getClass().getSimpleName()+" SET name=:name WHERE id=:id ", parameters);
+			Integer executeHql = this.tagServcie.executeHql("UPDATE "+this.getModel().getClass().getSimpleName()+" SET name=:name WHERE id=:id ", parameters);
+			
 			this.getJsonMap().put("s", executeHql);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,9 +90,9 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 	 * validate : 保存校验
 	 */
 	public void validateSave() {
-		TypeEntity type = this.getModel();
+		TagEntity type = this.getModel();
 		if(StringUtils.isBlank(type.getName())){
-			this.addFieldError("name","类型不能为空");
+			this.addFieldError("name","标签不能为空");
 		}
 		if(this.getFieldErrors().isEmpty()){
 			if(StringUtils.isBlank(type.getId())){
@@ -103,5 +100,4 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 			}
 		}
 	}
-	//-----------------------------
 }

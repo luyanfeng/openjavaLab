@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.luyanfeng.myblog.dao.BasicDao;
+import org.luyanfeng.myblog.entity.TypeEntity;
 import org.luyanfeng.myblog.util.GenericUtil;
 
 @SuppressWarnings("unchecked")
@@ -32,13 +33,9 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 	protected void setSf(SessionFactory sf){
 		this.sf = sf;
 	}
-
-
 	protected Class<T> getEntity() {
 		return  (Class<T>) GenericUtil.getGenericClass(getClass());
 	}
-	
-
 	@Override
 	public T getOne(String id) throws Exception {
 		try {
@@ -88,7 +85,7 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 	}
 
 	@Override
-	public boolean saveAll(T... entities) {
+	public boolean saveAll(T... entities) throws Exception {
 		boolean result = true;
 		try {
 			for (T t : entities) {
@@ -96,7 +93,7 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 			}
 		} catch (Exception e) {
 			result = false;
-			e.printStackTrace();
+			throw new Exception("### saveAll()方法出错！",e);
 		}
 		return result;
 	}
@@ -153,6 +150,12 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 		} catch (Exception e) {
 			throw new Exception("### SQL执行器出了问题 ！",e);
 		}
+	}
+	
+	@Override
+	public List<TypeEntity> getAll() throws Exception{
+		List<TypeEntity> list = this.getSession().createQuery("from "+this.getEntity().getSimpleName()).list();
+		return list;
 	}
 
 

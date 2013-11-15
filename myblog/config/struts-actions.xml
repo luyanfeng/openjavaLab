@@ -20,12 +20,12 @@
     <package name="home" namespace="/home" extends="default">
     	<!-- 导航 -->
         <action name="*" method="{1}" class="homeAction">
-            <result type="dispatcher" name="index">/WEB-INF/home/{1}.jsp</result>
-            <result type="dispatcher" name="article">/WEB-INF/home/{1}.jsp</result>
-            <result type="dispatcher" name="work">/WEB-INF/home/{1}.jsp</result>
-            <result type="dispatcher" name="about">/WEB-INF/home/{1}.jsp</result>
-            <result type="dispatcher" name="discuss">/WEB-INF/home/{1}.jsp</result>
-            <result type="dispatcher" name="picture">/WEB-INF/home/{1}.jsp</result>
+        	<result type="json" name="json-last" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+            <result type="dispatcher" >/WEB-INF/home/{1}.jsp</result>
         </action>
     </package>
     <package name="articlehome" namespace="/home/article" extends="home">
@@ -68,6 +68,10 @@
 				<param name="actionName">list</param>
 				<param name="namespace">/admin/type</param>
 			</result>
+			<result type="chain" name="forward-tags" >
+				<param name="actionName">list</param>
+				<param name="namespace">/admin/tag</param>
+			</result>
 			<result type="dispatcher" >/WEB-INF/admin/main/article/{1}.jsp</result>
 			<result type="dispatcher" name="input">/WEB-INF/admin/main/article/writer.jsp</result>
 		</action>
@@ -91,6 +95,27 @@
  				<param name="excludeNullProperties">true</param> 
 			</result>
 			<result type="dispatcher" >/WEB-INF/admin/main/type/{1}.jsp</result>
+		</action>
+	</package>
+	<!-- 类型 -->
+	<package name="tag" namespace="/admin/tag" extends="admin">
+		<action name="*" method="{1}" class="tagAction">
+			<result type="json" name="json-save" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="json" name="json-delete" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="json" name="json-switchHidden" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="dispatcher" >/WEB-INF/admin/main/tag/{1}.jsp</result>
 		</action>
 	</package>
 	

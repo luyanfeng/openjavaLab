@@ -1,63 +1,38 @@
 package org.luyanfeng.myblog.action;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.apache.struts2.interceptor.ServletResponseAware;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
-//TODO 
-@SuppressWarnings("unchecked")
-public class BasicAction<T> extends ActionSupport implements  ServletRequestAware,ServletResponseAware, ModelDriven<T>{
+public class BasicAction extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
 
-	private HttpServletResponse response;
-	private HttpServletRequest request;
+	private List<? extends Serializable> list = new ArrayList<>();
+	private LinkedHashMap<String, Integer> sortMap= new LinkedHashMap<>();
+	// json Map results
+	private Map<String,Serializable> jsonMap = new LinkedHashMap<>();
 	
-	private  T t = null;
-	{
-		try {
-			Type gsclass = this.getClass().getGenericSuperclass();
-			if (gsclass instanceof ParameterizedType) {
-				ParameterizedType ptype = (ParameterizedType) gsclass;
-				Type type = ptype.getActualTypeArguments()[0];
-				t = ((Class<T>)type).newInstance();
-			} 
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.addActionError("系统忙，请稍后再试！");
-		}
+	public List<? extends Serializable> getList() {
+		return list;
 	}
-	
-	
-	@Override
-	public T getModel() {
-		return t;
+	public void setList(List<? extends Serializable> list) {
+		this.list = list;
 	}
-	@Override
-	public void setServletResponse(HttpServletResponse response) {
-		this.response = response;
+	public LinkedHashMap<String, Integer> getSortMap() {
+		return sortMap;
 	}
-
-	@Override
-	public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-		
+	public void setSortMap(LinkedHashMap<String, Integer> sortMap) {
+		this.sortMap = sortMap;
 	}
-
-	public HttpServletResponse getResponse() {
-		return response;
+	public Map<String, Serializable> getJsonMap() {
+		return jsonMap;
 	}
-
-	public HttpServletRequest getRequest() {
-		return request;
+	public void setJsonMap(Map<String, Serializable> jsonMap) {
+		this.jsonMap = jsonMap;
 	}
-	
 }

@@ -20,5 +20,4 @@ public class TypeServcieIml extends BasicServiceIml<TypeEntity> {
 		super.setDao(dao);
 	}
 
-	
 }
