@@ -14,8 +14,9 @@ public class BasicAction extends ActionSupport {
 
 	private List<? extends Serializable> list = new ArrayList<>();
 	private LinkedHashMap<String, Integer> sortMap= new LinkedHashMap<>();
+	private LinkedHashMap<String,Object> whereMap = new LinkedHashMap<>();
 	// json Map results
-	private Map<String,Serializable> jsonMap = new LinkedHashMap<>();
+	private Map<String,Object> jsonMap = new LinkedHashMap<>();
 	
 	public List<? extends Serializable> getList() {
 		return list;
@@ -29,10 +30,17 @@ public class BasicAction extends ActionSupport {
 	public void setSortMap(LinkedHashMap<String, Integer> sortMap) {
 		this.sortMap = sortMap;
 	}
-	public Map<String, Serializable> getJsonMap() {
+	public Map<String, Object> getJsonMap() {
 		return jsonMap;
 	}
-	public void setJsonMap(Map<String, Serializable> jsonMap) {
+	public void setJsonMap(Map<String, Object> jsonMap) {
 		this.jsonMap = jsonMap;
 	}
+	public LinkedHashMap<String, Object> getWhereMap() {
+		return whereMap;
+	}
+	public void setWhereMap(LinkedHashMap<String, Object> whereMap) {
+		this.whereMap = whereMap;
+	}
+	
 }

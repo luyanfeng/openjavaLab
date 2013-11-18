@@ -26,8 +26,9 @@ public interface BasicDao<T> {
 	 * @param skip 查询开始行号
 	 * @param limit 设定反回查询的数量
 	 * @param sortMap 排序Map
+	 * @param tyid 
 	 */
-	public List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap) throws Exception;
+	public List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap, Map<String,Object> whereMap) throws Exception;
 
 	/**
 	 *  hibernate hql 写操作

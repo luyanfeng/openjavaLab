@@ -38,7 +38,8 @@ public class LoginDaoIml extends BasicDaoIml<UserEntity> {
 							"from "+this.getEntity().getSimpleName()+" as u WHERE u.user = ? AND u.email = ? AND u.passwd = ? ")
 					.setString(0, user)
 					.setString(1, email)
-					.setString(2, passwd).list();
+					.setString(2, passwd)
+					.list();
 			if (list != null && !list.isEmpty()) {
 				return list.get(0);
 			}

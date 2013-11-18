@@ -18,17 +18,21 @@ public class UserEntity implements Serializable {
 	private static final long serialVersionUID = 119345666020003942L;
 	
 	@Id
-	private String id;
-	private String name;
+	private String id;					// 主键
+	private String name;                // 妮称
+	@Column(nullable=false)             
+	private String email;               // 邮箱
+	private String user;                // 账号
+	private String passwd;              // 密码
+	private String info;                // 简介
+	@Column(nullable=false)             
+	@Temporal(TemporalType.TIMESTAMP)   
+	private Date time;                  // 建立时间
 	@Column(nullable=false)
-	private String email;
-	private String user;
-	private String passwd;
-	private String info;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date time;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date upateTime;
+	@Temporal(TemporalType.TIMESTAMP)   
+	private Date updateTime;            // 更新时间
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -71,19 +75,17 @@ public class UserEntity implements Serializable {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public Date getUpateTime() {
-		return upateTime;
+	public Date getUpdateTime() {
+		return updateTime;
 	}
-	public void setUpateTime(Date upateTime) {
-		this.upateTime = upateTime;
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", name=" + name + ", email=" + email
 				+ ", user=" + user + ", passwd=" + passwd + ", info=" + info
-				+ ", time=" + time + ", upateTime=" + upateTime + "]";
+				+ ", time=" + time + ", updateTime=" + updateTime + "]";
 	}
-	
-	
 
 }

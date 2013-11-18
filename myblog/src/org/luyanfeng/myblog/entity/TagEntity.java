@@ -27,8 +27,10 @@ public class TagEntity implements Serializable {
 	private String name;				// 名称
 	private Integer quantity = 0;		// 数量
 	private boolean isHidden;			// 显示、隐藏
-	@Column(nullable=false)	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable=false)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;					// 时间
+	
 	@ManyToMany(fetch=FetchType.LAZY, mappedBy="tagList", targetEntity=ArticleEntity.class)
 	private List<ArticleEntity> articles =  new ArrayList<>();
 	

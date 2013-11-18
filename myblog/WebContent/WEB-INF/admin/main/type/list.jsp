@@ -76,7 +76,7 @@ function deleteType(id){
 			url:"${applicationScope.path }/admin/type/delete.jap",
 			success:function(o){
 				if(o.s == 1){
-					initTags();
+					initTypes();
 				}else{
 					$("#listmessage div").html("网络不给力，请稍后再试");
 					$("#listmessage").show();

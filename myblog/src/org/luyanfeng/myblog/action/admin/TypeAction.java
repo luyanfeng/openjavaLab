@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.luyanfeng.myblog.action.BasicActionExt;
 import org.luyanfeng.myblog.entity.TypeEntity;
-import org.luyanfeng.myblog.service.iml.TypeServcieIml;
+import org.luyanfeng.myblog.service.iml.TypeServiceIml;
 import org.luyanfeng.myblog.util.GenericUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,8 @@ import org.springframework.stereotype.Controller;
 public class TypeAction extends BasicActionExt<TypeEntity> {
 	private static final long serialVersionUID = 1L;
 
-	@Resource(name="typeServcieIml")
-	private TypeServcieIml typeService;
+	@Resource(name="typeServiceIml")
+	private TypeServiceIml typeService;
 	
 	// parameters
 	private Integer skip = 0;
@@ -50,7 +50,7 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 		try {
 			this.getRequest().setAttribute("display", 0);
 			this.getSortMap().put("time", -1);
-			List<TypeEntity> page = this.typeService.getPage(skip, limit, this.getSortMap());
+			List<TypeEntity> page = this.typeService.getAll();
 			this.setList(page);
 		} catch (Exception e) {
 			this.getRequest().setAttribute("display", 1);

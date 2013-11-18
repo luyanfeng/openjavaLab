@@ -64,7 +64,7 @@
 	</bean>
 <!-- 	<aop:aspectj-autoproxy proxy-target-class="true"/> -->
 	<aop:config proxy-target-class="true">
-		<aop:pointcut expression="execution(* org.luyanfeng.myblog.service.iml.*.*(..) )" id="serviceMethods"/>
+		<aop:pointcut expression="execution(public * org.luyanfeng.myblog.service.iml..*(..) )" id="serviceMethods"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
 	</aop:config>
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">

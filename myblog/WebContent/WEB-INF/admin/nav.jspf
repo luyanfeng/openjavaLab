@@ -98,7 +98,7 @@ $("#main-nav a").click(function(){
 	}
 });
 function quit(){
-	$.post("${applicationScope.path}/admin/quit.jap",{"return":""},function(o){
+	$.post("${applicationScope.path}/login/quit.jap","",function(o){
 		if(o.s){
 			alert("你已退出系统，系统将要为你导航到博客主页");
 			window.localtion.href="${applicationScope.path}/home/index.jap";

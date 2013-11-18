@@ -26,6 +26,22 @@ public class LoginAction extends BasicActionExt<UserEntity> {
 		return "toLogin";
 	}
 	/**
+	 * 退出系统
+	 */
+	public String quit(){
+		try {
+			HttpSession session = this.getRequest().getSession(false);
+			if(session != null){
+				session.invalidate();
+			}
+			this.getJsonMap().put("s", 1);
+		} catch (Exception e) {
+			this.getJsonMap().put("s", 0);
+			this.addActionError("退出系统操作出错！");
+		}
+		return "json-quit";
+	}
+	/**
 	 * navigation： 后台首面转向
 	 */
 	public String login(){
@@ -47,7 +63,7 @@ public class LoginAction extends BasicActionExt<UserEntity> {
 		}
 		if(this.getFieldErrors().isEmpty()){
 			UserEntity user2 = this.service.getUser(user.getUser(), user.getPasswd(), user.getEmail());
-			HttpSession session = this.getRequest().getSession(false);
+			HttpSession session = this.getRequest().getSession();
 			if(user2 != null){
 				session.setAttribute(GenericUtil.SessionInfo.USER_EMAIL.toString(), user2.getEmail());
 				session.setAttribute(GenericUtil.SessionInfo.USER_INFO.toString(), user2);

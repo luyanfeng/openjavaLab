@@ -9,17 +9,8 @@
       <p>暂无</p>
     </div><!--close sidebar_item--> 
 </div><!--close sidebar-->    
-      
-<c:forEach begin="0" end="2" varStatus="vs"> 		
-<div class="sidebar">
-        <div class="sidebar_item">
-          <c:if test="${vs.index eq 0 }" ><h2>最近更新</h2></c:if>
-        <h3>时间</h3>
-        <p style="color:#999">文章简介.....文章简介.....文章简介.....文章简介.....文章简介.....文章简介.....</p>         
-</div><!--close sidebar_item--> 
-</div><!--close sidebar-->
-</c:forEach>
-
+<div id="last-data"></div>	
+<div id="typeNav-data"></div>	
 <div class="sidebar">
   <div class="sidebar_item">
     <h2>联系方式</h2>
@@ -27,4 +18,26 @@
     <p>邮件: <a href="mailto:luyanfeng@admin.com">luyanfeng@admin.com</a></p>
   </div><!--close sidebar_item--> 
 </div><!--close sidebar-->
-</div><!--close sidebar_container-->
+</div>
+<script type="text/javascript">
+$(function(){
+	// 取得最新更新信息
+	$.ajax({
+		url:"${applicationScope.path}/home/last.jap",
+		data:"",
+		type:"post",
+		success:function(o){
+			$("#last-data").html(o);
+		}
+	});
+	// 取得分类
+	$.ajax({
+		url:"${applicationScope.path}/home/typeNav.jap",
+		data:"",
+		type:"post",
+		success:function(o){
+			$("#typeNav-data").html(o);
+		}
+	});
+});
+</script>

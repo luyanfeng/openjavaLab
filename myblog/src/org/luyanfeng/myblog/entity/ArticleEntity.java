@@ -12,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,7 +26,7 @@ public class ArticleEntity implements Serializable {
 	
 	@Id @Column(length=40)
 	private String id;						// 统一主键 
-	@Column(nullable=false,length=50)		
+	@Column(nullable=false,length=100)		
 	private String title;					// 标题
 	@Column(nullable=false,length=5000)
 	private String content;					// 内容 
@@ -38,6 +37,7 @@ public class ArticleEntity implements Serializable {
 	private String author;					// 作者
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;						// 创建时间
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateTime;				// 更新时间
 	
 	@ManyToMany(fetch=FetchType.LAZY,  cascade={CascadeType.ALL})
@@ -46,7 +46,7 @@ public class ArticleEntity implements Serializable {
 		joinColumns={@JoinColumn(referencedColumnName="id",name ="article_id")},
 		inverseJoinColumns={@JoinColumn(referencedColumnName="id", name="type_id")}
 	)
-	private List<TypeEntity> typeList = new ArrayList<>();;	//分类
+	private List<TypeEntity> typeList = new ArrayList<>();	//分类
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade={CascadeType.ALL})
 	@JoinTable(
@@ -146,7 +146,7 @@ public class ArticleEntity implements Serializable {
 				+ content + ", readtimes=" + readtimes + ", reviewtimes="
 				+ reviewtimes + ", isOpen=" + isOpen + ", author=" + author
 				+ ", time=" + time + ", updateTime=" + updateTime
-				+ ", typeList=" + typeList + ", tagList=" + tagList + ", tags="
+				+ ", tags="
 				+ tags + ", types=" + types + "]";
 	}
 

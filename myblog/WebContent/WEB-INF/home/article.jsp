@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -30,7 +31,7 @@
 	
       <div id="content">
         <div class="content_item ">
-          <h2 >最近的文章</h2>
+          <h2 style="color:#257BD8"><c:out value="${requestScope.listType }" /></h2>
           <c:forEach items="${requestScope.results }" var="article" varStatus="vs">
             <div class="content_container ">       
 			  <h3>" <c:out value="${article.title }" /> "</h3>
@@ -39,7 +40,12 @@
 			   <c:when test="${fn:length(article.content) lt 100 }">article.content</c:when>
 			  <c:otherwise>${fn:substring(article.content, 0 , 100) }...</c:otherwise>
 			  </c:choose>
-			  <div><a href="${applicationScope.path}/home/article/detail.jap?id=${article.id}" target="_blank" style="clear:both;font-weight:normal; float: right;clear: both;color:#ECEFF4;font-size: 0.9em;">&gt;&gt;&gt;阅读</a></div>
+			  <div>
+			  <span style="float:right;font-size:1em;margin:2px 0px;"><fmt:formatDate value="${article.time }" pattern="yyyy年MM月dd日"/>
+			  <a href="${applicationScope.path}/home/article/detail.jap?nav=article&id=${article.id}" target="_blank" style="clear:both;font-weight:normal; float: right;color:#ECEFF4;">
+			  &gt;&gt;&gt;阅读</a>
+			  </span>
+			  </div>
 			  </div>
             </div>
           </c:forEach>

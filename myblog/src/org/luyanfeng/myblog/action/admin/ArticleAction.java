@@ -94,7 +94,7 @@ public class ArticleAction extends BasicActionExt<ArticleEntity> {
 		try {
 			this.getRequest().setAttribute("display", 0);
 			this.getJsonMap().put("time", -1);
-			List<ArticleEntity> page = this.articleService.getPage(skip, limit,this.getSortMap());
+			List<ArticleEntity> page = this.articleService.getPage(skip, limit,this.getSortMap(),null);
 			this.setList(page);
 		} catch (Exception e) {
 			this.getRequest().setAttribute("display", 1);

@@ -42,6 +42,7 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 			T t = null;
 			if (StringUtils.isNotBlank(id)) {
 				t = (T) this.getSession().get(this.getEntity(),	id);
+				System.out.println("###############  "+t);
 			}
 			return t;
 		} catch (Exception e) {
@@ -98,8 +99,9 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 		return result;
 	}
 
+	//XXX 这个得改！！！
 	@Override
-	public List<T> getPage(final int skip, final int limit, LinkedHashMap<String,Integer> sortMap) throws Exception {
+	public List<T> getPage(final int skip, final int limit, LinkedHashMap<String,Integer> sortMap, Map<String,Object> whereMap) throws Exception {
 		try {
 			String sortstr = "";
 			if(sortMap != null && !sortMap.isEmpty()){
@@ -109,11 +111,24 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 					if(tempi != 0){
 						sortstr += ",";
 					}
-					sortstr += "t."+sort.getKey()+ ( sort.getValue() == null || sort.getValue() > 0 ? " ASC " : " DESC " );
+					sortstr += sort.getKey()+ ( sort.getValue() == null || sort.getValue() > 0 ? " ASC " : " DESC " );
+					tempi++;
+				}
+			}
+			String wherestr = "";
+			if(whereMap != null && !whereMap.isEmpty()){
+				wherestr = " WHERE ";
+				int tempi = 0;
+				for(Map.Entry<String, Object> w : whereMap.entrySet()){
+					if(tempi != 0){
+						wherestr += ",";
+					}
+					wherestr += w.getKey()+"='"+ w.getValue()+"'";
+					tempi++;
 				}
 			}
 			return this.getSession()
-					.createQuery("FROM " + getEntity().getSimpleName() + " AS t" + sortstr )
+					.createQuery("FROM " + getEntity().getSimpleName() + sortstr +wherestr)
 					.setMaxResults(limit).setFirstResult(skip)
 					.list()
 					;

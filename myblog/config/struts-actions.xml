@@ -12,6 +12,11 @@
             	<param name="actionName">index</param>
             	<param name="namespace">/admin</param>
             </result>
+            <result type="json" name="json-quit" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
             <result type="dispatcher" name="toLogin">/WEB-INF/admin/{1}.jsp</result>
             <result type="dispatcher" name="error">/WEB-INF/admin/toLogin.jsp</result>
         </action>
@@ -20,11 +25,11 @@
     <package name="home" namespace="/home" extends="default">
     	<!-- 导航 -->
         <action name="*" method="{1}" class="homeAction">
-        	<result type="json" name="json-last" >
+        	<!-- <result type="json" name="json-last" >
 				<param name="root">jsonMap</param>
  				<param name="noCache">true</param>
  				<param name="excludeNullProperties">true</param> 
-			</result>
+			</result> -->
             <result type="dispatcher" >/WEB-INF/home/{1}.jsp</result>
         </action>
     </package>
@@ -38,11 +43,6 @@
 	<package name="admin" namespace="/admin" extends="default">
 		<default-interceptor-ref name="authenic-stack" />
 		<action name="*" method="{1}" class="adminAction">
-        	<result type="json" name="json-quit" >
-				<param name="root">jsonMap</param>
- 				<param name="noCache">true</param>
- 				<param name="excludeNullProperties">true</param> 
-			</result>
 			<result type="dispatcher" name="index">/WEB-INF/admin/{1}.jsp</result>
 		</action>
 	</package>

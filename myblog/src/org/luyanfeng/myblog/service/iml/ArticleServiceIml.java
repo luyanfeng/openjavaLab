@@ -3,7 +3,9 @@ package org.luyanfeng.myblog.service.iml;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -93,6 +95,12 @@ public class ArticleServiceIml extends BasicServiceIml<ArticleEntity> {
 			tags.add( tagEntity );
 		}
 		return tags;
+	}
+	
+	public List<ArticleEntity> getByType(int skip,int limit,String typeid)throws Exception {
+		TypeEntity one = this.typeDao.getOne(typeid);
+		List<ArticleEntity> articles = one.getArticles();
+		return articles;
 	}
 
 

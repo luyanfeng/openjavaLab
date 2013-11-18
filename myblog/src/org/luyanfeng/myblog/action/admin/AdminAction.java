@@ -17,20 +17,6 @@ public class AdminAction extends BasicActionExt<UserEntity>{
 	public String index(){
 		return "index";
 	}
-	/**
-	 * 退出系统
-	 */
-	public String quit(){
-		try {
-			this.getRequest().getSession(false).invalidate();
-			this.getJsonMap().put("s", 1);
-		} catch (Exception e) {
-			this.getJsonMap().put("s", 0);
-			this.addActionError("退出系统操作出错！");
-		}
-		return "json-quit";
-	}
-	
 	public String getNav() {
 		return nav;
 	}

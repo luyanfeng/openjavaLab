@@ -21,7 +21,7 @@ public interface BasicService<T> {
 	
 	public boolean saveAll(T... entity) throws Exception;
 	
-	List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap) throws Exception;
+	List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap,  Map<String, Object> whereMap) throws Exception;
 
 	Integer executeHql(String hql, Map<String, Serializable> parameters) throws Exception;
 	

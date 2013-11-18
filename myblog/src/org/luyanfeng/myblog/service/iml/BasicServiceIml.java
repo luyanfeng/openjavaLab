@@ -35,8 +35,8 @@ public class BasicServiceIml<T> implements BasicService<T> {
 		return this.dao.getSome(ids);
 	}
 	@Override
-	public List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap ) throws Exception {
-		return this.dao.getPage(skip, limit, sortMap);
+	public List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap ,Map<String, Object> tyid) throws Exception {
+		return this.dao.getPage(skip, limit, sortMap, tyid);
 	}
 
 	@Override
