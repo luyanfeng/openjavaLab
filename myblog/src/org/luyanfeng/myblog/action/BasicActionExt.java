@@ -3,9 +3,6 @@ package org.luyanfeng.myblog.action;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
@@ -13,12 +10,10 @@ import com.opensymphony.xwork2.ModelDriven;
 
 //TODO 
 @SuppressWarnings("unchecked")
-public class BasicActionExt<T> extends BasicAction implements  ServletRequestAware,ServletResponseAware, ModelDriven<T>{
+public class BasicActionExt<T> extends BasicAction implements  ModelDriven<T>{
 
 	private static final long serialVersionUID = 1L;
 
-	private HttpServletResponse response;
-	private HttpServletRequest request;
 	private  T t = null;
 	{
 		try {
@@ -38,23 +33,5 @@ public class BasicActionExt<T> extends BasicAction implements  ServletRequestAwa
 	@Override
 	public T getModel() {
 		return t;
-	}
-	@Override
-	public void setServletResponse(HttpServletResponse response) {
-		this.response = response;
-	}
-
-	@Override
-	public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-		
-	}
-
-	public HttpServletResponse getResponse() {
-		return response;
-	}
-
-	public HttpServletRequest getRequest() {
-		return request;
 	}
 }

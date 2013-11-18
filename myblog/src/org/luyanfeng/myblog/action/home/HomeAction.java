@@ -76,8 +76,8 @@ public class HomeAction extends BasicAction{
 			this.getSortMap().put("time", -1);
 			if(StringUtils.isBlank(this.getTyid())){
 				List<ArticleEntity> page = articleService.getPage(skip, limit, this.getSortMap(),null);
-				ServletActionContext.getRequest().setAttribute("results", page);
-				ServletActionContext.getRequest().setAttribute("listType", "最近的文章");
+				this.getRequest().setAttribute("results", page);
+				this.getRequest().setAttribute("listType", "最近的文章");
 			}else{
 				TypeEntity type = this.typeService.getOne(this.getTyid());
 				List<ArticleEntity> page = this.articleService.getByType(skip, limit, this.getTyid());
