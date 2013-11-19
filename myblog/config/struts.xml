@@ -4,8 +4,10 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <constant name="struts.action.extension" value="action,jap" />
+    <constant name="struts.action.extension" value="jap" />
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.custom.i18n.resources" value="messageMap" />
+    
     <constant name="struts.ui.theme" value="simple" />
     <constant name="struts.devMode" value="true" />
     <constant name="struts.i18n.reload" value="true" />

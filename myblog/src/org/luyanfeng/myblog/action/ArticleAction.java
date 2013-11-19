@@ -1,4 +1,4 @@
-package org.luyanfeng.myblog.action.admin;
+package org.luyanfeng.myblog.action;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.luyanfeng.myblog.action.BasicActionExt;
 import org.luyanfeng.myblog.entity.ArticleEntity;
 import org.luyanfeng.myblog.entity.UserEntity;
 import org.luyanfeng.myblog.service.iml.ArticleServiceIml;

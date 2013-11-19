@@ -1,7 +1,7 @@
 package org.luyanfeng.myblog.interceptor;
 
 import org.apache.commons.lang3.StringUtils;
-import org.luyanfeng.myblog.action.admin.LoginAction;
+import org.luyanfeng.myblog.action.LoginAction;
 import org.luyanfeng.myblog.util.GenericUtil;
 
 import com.opensymphony.xwork2.ActionInvocation;

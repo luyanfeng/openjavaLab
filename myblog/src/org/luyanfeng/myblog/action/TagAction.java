@@ -1,4 +1,4 @@
-package org.luyanfeng.myblog.action.admin;
+package org.luyanfeng.myblog.action;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.luyanfeng.myblog.action.BasicActionExt;
 import org.luyanfeng.myblog.entity.TagEntity;
 import org.luyanfeng.myblog.entity.TypeEntity;
 import org.luyanfeng.myblog.service.iml.TagServcieIml;
