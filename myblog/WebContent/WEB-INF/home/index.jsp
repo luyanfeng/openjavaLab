@@ -30,28 +30,12 @@
 	 
 	  <div id="content">
         <div class="content_item">
-		  <h1>Welcome To Your Website</h1> 
-	      <p>This standards compliant, simple, fixed width website template is released as an &lsquo;open source&rsquo; design (under the Creative Commons Attribution 3.0 Licence), which means that you are free to download and use it for anything you want (including modifying and amending it). If you wish to remove the &lsquo;ARaynorDesign&rsquo; link in the footer of the template, all I ask is for a donation of &pound;20.00 GBP.</p>	  
-		  
-		  <div class="content_image">
-		    <img src="${applicationScope.path }/comm/images/content_image1.jpg" alt="image1"/>
-	      </div>
-		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus tempor enim. Aliquam facilisis neque non nunc posuere eget volutpat metus tincidunt.</p>
-		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus tempor enim.</p>
-		  <br style="clear:both"/>
-		  
-		  <div class="content_container">
-		    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus tempor enim. Aliquam facilisis neque non nunc posuere eget volutpat metus tincidunt.</p>
-		  	<div class="button_small">
+		  <h1>Hi,我的博客就要上线了！</h1> 
+		  <!-- <div class="button_small">
 		      <a href="#">Read more</a>
-		    </div><!--close button_small-->
-		  </div><!--close content_container-->
-          <div class="content_container">
-		    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus tempor enim. Aliquam facilisis neque non nunc posuere eget volutpat metus tincidunt.</p>          
-		  	<div class="button_small">
-		      <a href="#">Read more</a>
-		    </div><!--close button_small-->		  
-		  </div><!--close content_container-->			  
+	  	  </div> -->
+	  	  
+	  	  
 		</div><!--close content_item-->
       </div><!--close content-->   
 	</div><!--close site_content--> 

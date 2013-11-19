@@ -42,6 +42,6 @@ public interface BasicDao<T> {
 	/**
 	 * 得到所有 --- 一般数量不是很多的表可以用
 	 */
-	public List<TypeEntity> getAll()throws Exception;
+	public List<T> getAll()throws Exception;
 
 }

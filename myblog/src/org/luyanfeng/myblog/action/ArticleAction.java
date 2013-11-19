@@ -1,6 +1,7 @@
 package org.luyanfeng.myblog.action;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +11,14 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.luyanfeng.myblog.entity.ArticleEntity;
+import org.luyanfeng.myblog.entity.TagEntity;
+import org.luyanfeng.myblog.entity.TypeEntity;
 import org.luyanfeng.myblog.entity.UserEntity;
 import org.luyanfeng.myblog.service.iml.ArticleServiceIml;
+import org.luyanfeng.myblog.service.iml.TagServiceIml;
+import org.luyanfeng.myblog.service.iml.TypeServiceIml;
 import org.luyanfeng.myblog.util.GenericUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.util.WebUtils;
@@ -25,10 +31,18 @@ public class ArticleAction extends BasicActionExt<ArticleEntity> {
 	@Resource(name="articleServiceIml")
 	private ArticleServiceIml articleService;
 	
+	@Autowired
+	private TypeServiceIml typeServiceIml;
+	@Autowired
+	private TagServiceIml tagServiceIml;
+	
+	private List<TypeEntity> typeList = new ArrayList<>();
+	private List<TagEntity> tagList = new ArrayList<>();
 	private String nav;
 	// parameters
 	private Integer skip = 0;
 	private Integer limit = 10;
+
 	/**
 	 *  navigation : 类型管理
 	 */
@@ -79,10 +93,23 @@ public class ArticleAction extends BasicActionExt<ArticleEntity> {
 	public String writer(){
 		try {
 			this.getRequest().setAttribute("display", 0);
-			this.getRequest().setAttribute("result", this.articleService.getOne(this.getModel().getId()) );
+			ArticleEntity one = this.articleService.getOne(this.getModel().getId()) ;
+			this.typeList = this.typeServiceIml.getAll();
+			if(one != null){
+				List<? extends TypeEntity> types = this.typeServiceIml.getByAId(one.getId());
+				if(types != null){
+					one.getTypeList().addAll(types);
+				}
+				List<? extends TagEntity> tags = this.tagServiceIml.getByAId(one.getId());
+				if(tags != null){
+					one.getTagList().addAll(tags);
+				}
+				this.getRequest().setAttribute("result", one);
+			}
 		} catch (Exception e) {
 			this.getRequest().setAttribute("display", 1);
 			this.addActionError("服务器忙，请稍后再试！"+e.getMessage());
+			e.printStackTrace();
 		}
 		return SUCCESS;
 	}
@@ -98,6 +125,7 @@ public class ArticleAction extends BasicActionExt<ArticleEntity> {
 		} catch (Exception e) {
 			this.getRequest().setAttribute("display", 1);
 			this.addActionError("服务器忙，请稍后再试！"+e.getMessage());
+			e.printStackTrace();
 		}
 		return SUCCESS;
 	}
@@ -180,4 +208,17 @@ public class ArticleAction extends BasicActionExt<ArticleEntity> {
 	public void setNav(String nav) {
 		this.nav = nav;
 	}
+	public List<TypeEntity> getTypeList() {
+		return typeList;
+	}
+	public void setTypeList(List<TypeEntity> typeList) {
+		this.typeList = typeList;
+	}
+	public List<TagEntity> getTagList() {
+		return tagList;
+	}
+	public void setTagList(List<TagEntity> tagList) {
+		this.tagList = tagList;
+	}
+	
 }

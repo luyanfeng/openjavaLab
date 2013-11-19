@@ -5,14 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,20 +35,22 @@ public class ArticleEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateTime;				// 更新时间
 	
-	@ManyToMany(fetch=FetchType.LAZY,  cascade={CascadeType.ALL})
+	/*@ManyToMany(fetch=FetchType.LAZY,  cascade={CascadeType.ALL})
 	@JoinTable(
 		name="bl_article_type",
 		joinColumns={@JoinColumn(referencedColumnName="id",name ="article_id")},
 		inverseJoinColumns={@JoinColumn(referencedColumnName="id", name="type_id")}
-	)
+	)*/
+	@Transient
 	private List<TypeEntity> typeList = new ArrayList<>();	//分类
 	
-	@ManyToMany(fetch=FetchType.LAZY, cascade={CascadeType.ALL})
+	/*@ManyToMany(fetch=FetchType.LAZY, cascade={CascadeType.ALL})
 	@JoinTable(
 			name="bl_article_tag",
 			joinColumns={@JoinColumn(referencedColumnName="id",name="article_id")},
 			inverseJoinColumns={@JoinColumn(referencedColumnName="id", name="tag_id")}
-		)	
+		)*/	
+	@Transient
 	private List<TagEntity> tagList = new ArrayList<>();	// 标签
 	
 	@Transient

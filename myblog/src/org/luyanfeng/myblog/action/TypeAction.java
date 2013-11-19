@@ -22,10 +22,6 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 	@Resource(name="typeServiceIml")
 	private TypeServiceIml typeService;
 	
-	// parameters
-	private Integer skip = 0;
-	private Integer limit = 10;
-	
 	/**
 	 *	显隐开关
 	 */
@@ -49,7 +45,7 @@ public class TypeAction extends BasicActionExt<TypeEntity> {
 		try {
 			this.getRequest().setAttribute("display", 0);
 			this.getSortMap().put("time", -1);
-			List<TypeEntity> page = this.typeService.getAll();
+			List<TypeEntity> page = this.typeService.getAll(true);
 			this.setList(page);
 		} catch (Exception e) {
 			this.getRequest().setAttribute("display", 1);

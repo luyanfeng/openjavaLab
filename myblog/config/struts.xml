@@ -37,5 +37,6 @@
             <result>/WEB-INF/comm/404.jsp</result>
         </action>
     </package>
-	<include file="struts-actions.xml" />
+	<include file="struts-home-actions.xml" />
+	<include file="struts-admin-actions.xml" />
 </struts>

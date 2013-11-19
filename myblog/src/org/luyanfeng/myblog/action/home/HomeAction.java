@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.luyanfeng.myblog.action.BasicAction;
 import org.luyanfeng.myblog.entity.ArticleEntity;
 import org.luyanfeng.myblog.entity.TypeEntity;
@@ -59,7 +58,7 @@ public class HomeAction extends BasicAction{
 		try {
 			this.getSortMap().put("updateTime", -1);
 			this.getSortMap().put("time", -1);
-			List<TypeEntity> all = this.typeService.getAll();
+			List<TypeEntity> all = this.typeService.getAll(true);
 			this.setList(all);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,19 +73,22 @@ public class HomeAction extends BasicAction{
 	public String article(){
 		try {
 			this.getSortMap().put("time", -1);
+			String listType = "最近的文章";
+			List<ArticleEntity> results = null;
 			if(StringUtils.isBlank(this.getTyid())){
-				List<ArticleEntity> page = articleService.getPage(skip, limit, this.getSortMap(),null);
-				this.getRequest().setAttribute("results", page);
-				this.getRequest().setAttribute("listType", "最近的文章");
+				List<ArticleEntity> page = articleService.getPage(0, 10, this.getSortMap(),null);
+				results = page;
 			}else{
 				TypeEntity type = this.typeService.getOne(this.getTyid());
 				List<ArticleEntity> page = this.articleService.getByType(skip, limit, this.getTyid());
-				ServletActionContext.getRequest().setAttribute("results", page);
-				ServletActionContext.getRequest().setAttribute("listType", type.getName());
+				results = page;
+				listType = type.getName();
 			}
+			this.getRequest().setAttribute("results", results);
+			this.getRequest().setAttribute("listType", listType);
 		} catch (Exception e) {
-			e.printStackTrace();
 			this.addActionError("服务器忙，请稍后再试！"+e.getMessage());
+			e.printStackTrace();
 		}
 		return SUCCESS;
 	}

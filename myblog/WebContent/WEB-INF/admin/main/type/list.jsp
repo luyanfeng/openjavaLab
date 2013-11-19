@@ -36,7 +36,7 @@
             	
             </td>
             <td style="text-align:center"><s:property value="#type.time "/>&nbsp;</td>
-            <td style="text-align:center"><s:property value="#type.quantity "/>&nbsp;</td>
+            <td style="text-align:center"><s:property value="#type.articles.size() "/>&nbsp;</td>
             <td style="text-align:center">
             <a href="javascript:void(0)" onclick="switchHidden('${type.id}')">${type.hidden ? '显示' :'隐藏'}</a> | 
             <a href="javascript:void(0)" onclick="deleteType('${type.id}')">删除</a>

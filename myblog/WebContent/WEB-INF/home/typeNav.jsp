@@ -9,7 +9,7 @@
 <ul class="sidebar_item" style="list-style-type: none;margin:0px ;	">
 	<li style="border-bottom:1px dotted #999;margin-right:10px;padding-bottom:3px;">
  	<a href="${applicationScope.path }/home/article.jap?nav=article&tyid=${item.id}" style="font-style: none;font-weight: normal;"> <c:out value="${item.name }"/></a>
- 	<span style="float:right;">(<c:out value="${item.quantity }" />)</span>
+ 	<span style="float:right;">(<c:out value="${item.articles.size() }" />)</span>
 	</li>
 </ul>
 </div>  

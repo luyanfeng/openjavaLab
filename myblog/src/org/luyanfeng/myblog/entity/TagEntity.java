@@ -7,15 +7,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="bl_tag")
+@Table(name="bl_tag",uniqueConstraints={@UniqueConstraint(columnNames={"name"})})
 public class TagEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,13 +25,13 @@ public class TagEntity implements Serializable {
 	private String id;					// 统一主键 
 	@Column(nullable=false,length=50)
 	private String name;				// 名称
-	private Integer quantity = 0;		// 数量
 	private boolean isHidden;			// 显示、隐藏
 	@Column(nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;					// 时间
 	
-	@ManyToMany(fetch=FetchType.LAZY, mappedBy="tagList", targetEntity=ArticleEntity.class)
+	/*@ManyToMany(fetch=FetchType.LAZY, mappedBy="tagList", targetEntity=ArticleEntity.class)*/
+	@Transient
 	private List<ArticleEntity> articles =  new ArrayList<>();
 	
 	public String getId() {
@@ -45,12 +45,6 @@ public class TagEntity implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Integer getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
 	}
 	public boolean isHidden() {
 		return isHidden;
@@ -73,9 +67,8 @@ public class TagEntity implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "TagEntity [id=" + id + ", name=" + name + ", quantity="
-				+ quantity + ", isHidden=" + isHidden + ", time=" + time
-				+ ", articles=" + articles + "]";
+		return "TagEntity [id=" + id + ", name=" + name + ", isHidden="
+				+ isHidden + ", time=" + time + ", articles=" + articles + "]";
 	}
 	
 }

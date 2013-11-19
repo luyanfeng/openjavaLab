@@ -5,15 +5,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.luyanfeng.myblog.entity.TypeEntity;
-
 public interface BasicService<T> {
 	
 	public T getOne(String id) throws Exception;
 	
 	public List<T> getSome(String... ids);
 	
-	public List<TypeEntity> getAll()throws Exception;
+	public List<T> getAll()throws Exception;
 	
 	public boolean delSome(String ... ids) throws Exception;
 	

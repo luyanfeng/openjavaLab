@@ -28,8 +28,14 @@
 				<td><span style="display:none;" class="user_subul input-notification error png_bg"><s:fielderror fieldName="content"/></span></td>
 			</tr>
 			
-			<tr><td style="text-align: right">标签：</td><td><input type="text" name="tags" value="${article.tags }" class="text-input " style="width:99%"/></td><td><span style="color:#999">（多个标签之间用","分隔）</span></td></tr>			
+			<tr><td style="text-align: right">标签：</td><td><input type="text" name="tags" value="" class="text-input " style="width:99%"/></td><td><span style="color:#999">（多个标签之间用","分隔）</span></td></tr>			
+			<%-- <tr><td>&nbsp;</td><td colspan="2">
+			<s:checkboxlist list="#request.result.typeList.{name}" value="#request.result.typeList.{name}" name="tags"/>
+			</td></tr> --%>
 			<tr><td style="text-align: right">个人分类：</td><td><input type="text" name="types" value="${article.tags }" class="text-input " style="width:99%"/></td><td><span style="color:#999">（多个分类之间用","分隔）</span></td></tr>			
+			<%-- <tr><td>&nbsp;</td><td colspan="2">
+			<s:checkboxlist list="#request.result.tagList.{name}" value="#request.result.tagList.{name}" name="tags"/>
+			</td></tr> --%>
 			<c:if test="${!empty result }">
 			<tr><td style="text-align: right">更新时间：</td><td colspan="2">${!empty result.updateTime ? result.updateTime : result.time }</td></tr>
 			</c:if>

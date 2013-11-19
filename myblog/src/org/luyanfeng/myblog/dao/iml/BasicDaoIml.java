@@ -42,7 +42,6 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 			T t = null;
 			if (StringUtils.isNotBlank(id)) {
 				t = (T) this.getSession().get(this.getEntity(),	id);
-				System.out.println("###############  "+t);
 			}
 			return t;
 		} catch (Exception e) {
@@ -166,12 +165,9 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 			throw new Exception("### SQL执行器出了问题 ！",e);
 		}
 	}
-	
 	@Override
-	public List<TypeEntity> getAll() throws Exception{
-		List<TypeEntity> list = this.getSession().createQuery("from "+this.getEntity().getSimpleName()).list();
+	public List<T> getAll() throws Exception{
+		List<T> list = this.getSession().createQuery("from "+this.getEntity().getSimpleName()).list();
 		return list;
 	}
-
-
 }

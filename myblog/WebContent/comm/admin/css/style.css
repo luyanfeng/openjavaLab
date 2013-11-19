@@ -442,9 +442,9 @@ ul.shortcut-buttons-set li {
 /*************** Forms ***************/
 
 form label {
-                display: block;
+/*                 display: block; */
                 padding: 0 0 10px;
-                font-weight: bold;
+/*                 font-weight: bold; */
                 }
              
 form fieldset legend {

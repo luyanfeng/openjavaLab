@@ -36,7 +36,7 @@
             	
             </td>
             <td style="text-align:center"><s:property value="#tag.time "/>&nbsp;</td>
-            <td style="text-align:center"><s:property value="#tag.quantity "/>&nbsp;</td>
+            <td style="text-align:center"><s:property value="#tag.articles.size() "/>&nbsp;</td>
             <td style="text-align:center">
             <a href="javascript:void(0)" onclick="switchHidden('${tag.id}')">${tag.hidden ? '显示' :'隐藏'}</a> | 
             <a href="javascript:void(0)" onclick="deletetag('${tag.id}')">删除</a>

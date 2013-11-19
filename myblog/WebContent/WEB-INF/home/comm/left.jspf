@@ -6,18 +6,22 @@
 <div class="sidebar">
     <div class="sidebar_item">
       <h2>最新动态</h2>
-      <p>暂无</p>
-    </div><!--close sidebar_item--> 
-</div><!--close sidebar-->    
+      <MARQUEE style="color:#fff;padding:5px;height:80px;background-color: #444" behavior="scroll" direction="up" 
+      draggable="false" contenteditable="false" truespeed="truespeed" scrolldelay="50" scrollamount="1" >
+		博客初步完成文章功能博客初步完成文章功能博客初步完成文章功能博客初步完成文章功能
+      </MARQUEE>
+    </div> 
+</div> 
+<!-- 最近新的文章10条 -->
 <div id="last-data"></div>	
+<!-- 文章分类 -->
 <div id="typeNav-data"></div>	
 <div class="sidebar">
   <div class="sidebar_item">
     <h2>联系方式</h2>
-    <p>电话: +44 (0)1234 567891</p>
-    <p>邮件: <a href="mailto:luyanfeng@admin.com">luyanfeng@admin.com</a></p>
-  </div><!--close sidebar_item--> 
-</div><!--close sidebar-->
+    <p>邮件: <a href="mailto:luyanfeng001001@163.com">luyanfeng001001@163.com</a></p>
+  </div> 
+</div> 
 </div>
 <script type="text/javascript">
 $(function(){

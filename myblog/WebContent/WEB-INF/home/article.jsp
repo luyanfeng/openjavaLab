@@ -33,7 +33,7 @@
         <div class="content_item ">
           <h2 style="color:#257BD8"><c:out value="${requestScope.listType }" /></h2>
           <c:forEach items="${requestScope.results }" var="article" varStatus="vs">
-            <div class="content_container ">       
+            <div  style="float:left;clear:both;width:100%;margin-top:10px;">       
 			  <h3>" <c:out value="${article.title }" /> "</h3>
 			  <div style="color:#999;text-indent:2em ; font-size :100% ;border-bottom : 1px dotted #666; padding-bottom: 25px;" >
 			  <c:choose>
@@ -41,9 +41,10 @@
 			  <c:otherwise>${fn:substring(article.content, 0 , 100) }...</c:otherwise>
 			  </c:choose>
 			  <div>
-			  <span style="float:right;font-size:1em;margin:2px 0px;"><fmt:formatDate value="${article.time }" pattern="yyyy年MM月dd日"/>
+			  <span style="float:right;font-size:1em;margin:2px 0px;">
 			  <a href="${applicationScope.path}/home/article/detail.jap?nav=article&id=${article.id}" target="_blank" style="clear:both;font-weight:normal; float: right;color:#ECEFF4;">
 			  &gt;&gt;&gt;阅读</a>
+			  <fmt:formatDate value="${article.time }" pattern="yyyy年MM月dd日"/>
 			  </span>
 			  </div>
 			  </div>

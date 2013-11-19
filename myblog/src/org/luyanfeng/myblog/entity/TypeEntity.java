@@ -7,15 +7,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="bl_type")
+@Table(name="bl_type", uniqueConstraints={@UniqueConstraint(columnNames={"name"})})
 public class TypeEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,6 @@ public class TypeEntity implements Serializable {
 	private String id;					// 统一主键 
 	@Column(nullable=false,length=50)
 	private String name;				// 名称
-	private Integer quantity = 0;		// 数量
 	private boolean isHidden;			// 显示、隐藏
 	@Column(nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -36,7 +35,8 @@ public class TypeEntity implements Serializable {
 	@Column(length=40)
 	private String subid;				// 队后数据主键 null时为最后一个
 	
-	@ManyToMany(fetch=FetchType.LAZY ,mappedBy="typeList" , targetEntity=ArticleEntity.class)
+	/*@ManyToMany(fetch=FetchType.LAZY ,mappedBy="typeList" , targetEntity=ArticleEntity.class)*/
+	@Transient
 	private List<ArticleEntity> articles =  new ArrayList<>();
 	
 	
@@ -53,12 +53,6 @@ public class TypeEntity implements Serializable {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Integer getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
 	}
 	public boolean isHidden() {
 		return isHidden;
@@ -94,10 +88,9 @@ public class TypeEntity implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "TypeEntity [id=" + id + ", name=" + name + ", quantity="
-				+ quantity + ", isHidden=" + isHidden + ", time=" + time
-				+ ", preid=" + preid + ", subid=" + subid + ", articles="
-				+ articles + "]";
+		return "TypeEntity [id=" + id + ", name=" + name + ", isHidden="
+				+ isHidden + ", time=" + time + ", preid=" + preid + ", subid="
+				+ subid + ", articles=" + articles + "]";
 	}
 	
 }

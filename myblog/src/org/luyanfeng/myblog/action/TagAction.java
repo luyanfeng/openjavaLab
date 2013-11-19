@@ -8,9 +8,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.luyanfeng.myblog.entity.ArticleEntity;
 import org.luyanfeng.myblog.entity.TagEntity;
 import org.luyanfeng.myblog.entity.TypeEntity;
-import org.luyanfeng.myblog.service.iml.TagServcieIml;
+import org.luyanfeng.myblog.service.iml.TagServiceIml;
 import org.luyanfeng.myblog.util.GenericUtil;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -20,8 +21,8 @@ import org.springframework.stereotype.Controller;
 public class TagAction extends BasicActionExt<TagEntity> {
 	private static final long serialVersionUID = 1L;
 
-	@Resource(name="tagServcieIml")
-	private TagServcieIml tagServcie;
+	@Resource(name="tagServiceIml")
+	private TagServiceIml tagService;
 	
 	/**
 	 *	显隐开关
@@ -31,7 +32,7 @@ public class TagAction extends BasicActionExt<TagEntity> {
 			this.getJsonMap().put("s", 0);
 			Map<String, Serializable> parameters = new HashMap<>();
 			parameters.put("id", this.getModel().getId());
-			Integer ok = this.tagServcie.executeHql("UPDATE "+this.getModel().getClass().getSimpleName()+" SET isHidden=isHidden^1 WHERE id=:id", parameters );
+			Integer ok = this.tagService.executeHql("UPDATE "+this.getModel().getClass().getSimpleName()+" SET isHidden=isHidden^1 WHERE id=:id", parameters );
 			if(ok > 0) this.getJsonMap().put("s", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,7 +46,7 @@ public class TagAction extends BasicActionExt<TagEntity> {
 	public String list(){
 		try {
 			this.getRequest().setAttribute("display", 0);
-			List<TypeEntity> page = this.tagServcie.getAll();
+			List<TagEntity> page = this.tagService.getAll(true);
 			this.setList(page);
 		} catch (Exception e) {
 			this.getRequest().setAttribute("display", 1);
@@ -59,7 +60,7 @@ public class TagAction extends BasicActionExt<TagEntity> {
 	 */
 	public String delete(){
 		try {
-			boolean delSome = this.tagServcie.delSome(this.getModel().getId());
+			boolean delSome = this.tagService.delSome(this.getModel().getId());
 			this.getJsonMap().put("s", delSome? 1 : 0 );
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,7 +76,7 @@ public class TagAction extends BasicActionExt<TagEntity> {
 			Map<String, Serializable> parameters = new HashMap<>();
 			parameters.put("id", this.getModel().getId());
 			parameters.put("name", this.getModel().getName());
-			Integer executeHql = this.tagServcie.executeHql("UPDATE "+this.getModel().getClass().getSimpleName()+" SET name=:name WHERE id=:id ", parameters);
+			Integer executeHql = this.tagService.executeHql("UPDATE "+this.getModel().getClass().getSimpleName()+" SET name=:name WHERE id=:id ", parameters);
 			
 			this.getJsonMap().put("s", executeHql);
 		} catch (Exception e) {

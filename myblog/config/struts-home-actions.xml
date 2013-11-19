@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<!-- 用户登录专用 -->
+    <package name="login" namespace="/login" extends="default">
+    	<!-- 导航 -->
+        <action name="*" method="{1}" class="loginAction">
+            <result type="redirectAction">
+            	<param name="actionName">index</param>
+            	<param name="namespace">/admin</param>
+            </result>
+            <result type="json" name="json-quit" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+            <result type="dispatcher" name="toLogin">/WEB-INF/admin/{1}.jsp</result>
+            <result type="dispatcher" name="error">/WEB-INF/admin/toLogin.jsp</result>
+        </action>
+    </package>
+<!-- 前台 -->
+    <package name="home" namespace="/home" extends="default">
+    	<!-- 导航 -->
+        <action name="*" method="{1}" class="homeAction">
+            <result type="dispatcher" >/WEB-INF/home/{1}.jsp</result>
+        </action>
+    </package>
+    <package name="articlehome" namespace="/home/article" extends="home">
+    	<action name="detail" method="detail" class="articleAction">
+    		<result type="dispatcher" >/WEB-INF/home/article/detail.jsp</result>
+    	</action>
+    </package>
+</struts>
