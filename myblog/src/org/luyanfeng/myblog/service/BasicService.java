@@ -25,5 +25,10 @@ public interface BasicService<T> {
 	
 	// 本地sql接口，一般少用
 	Integer executeLocalHql(String sql, Map<String, Serializable> parameters) throws Exception;
+	
+	/**
+	 * 取得最新的记录
+	 */
+	public T getLast();
 
 }

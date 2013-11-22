@@ -10,7 +10,7 @@
       <a href="javascript:void(0)" onclick="quit()" title="退出">退出</a> 
     </div>
     <ul id="main-nav">
-      <li> <a href="javascript:void(0)" class="nav-top-item no-submenu">于关主人 </a> </li>
+      <li> <a href="javascript:void(0)" class="nav-top-item no-submenu" _page="${applicationScope.path }/admin/about.jap">于关主人 </a> </li>
       <li> <a href="javascript:void(0)" class="nav-top-item current"> 文章 </a>
         <ul>
           <li><a href="javascript:void(0)" _page="${applicationScope.path }/admin/article/writer.jap">撰写新文章</a></li>
@@ -21,17 +21,17 @@
       </li>
       <li> <a href="javascript:void(0)" class="nav-top-item" > 工作 </a>
         <ul>
-          <li><a href="javascript:void(0)">发布新工作</a></li>
+          <li><a href="javascript:void(0)" >发布新工作</a></li>
           <li><a href="javascript:void(0)">管理工作</a></li>
           <li><a href="javascript:void(0)">工作预览</a></li>
         </ul>
       </li>
       <li> <a href="javascript:void(0)" class="nav-top-item"> 图册 </a>
         <ul>
-          <li><a href="javascript:void(0)">上传图片</a></li>
-          <li><a href="javascript:void(0)">新建图册</a></li>
-          <li><a href="javascript:void(0)">管理图册</a></li>
-          <li><a href="javascript:void(0)">管理标签</a></li>
+          <li><a href="javascript:void(0)" _page="${applicationScope.path }/admin/image/toUpload.jap">上传图片</a></li>
+          <li><a href="javascript:void(0)" _page="${applicationScope.path }/admin/image/toSave.jap">新建图册</a></li>
+          <li><a href="javascript:void(0)" _page="${applicationScope.path }/admin/image/list.jap">管理图册</a></li>
+          <li><a href="javascript:void(0)" _page="${applicationScope.path }/admin/image/tags.jap">管理标签</a></li>
         </ul>
       </li>
       <li> <a href="javascript:void(0)" class="nav-top-item"> 系统任务 </a>

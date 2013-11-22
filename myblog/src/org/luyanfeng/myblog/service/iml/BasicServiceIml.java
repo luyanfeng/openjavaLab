@@ -7,12 +7,15 @@ import java.util.Map;
 
 import org.luyanfeng.myblog.dao.BasicDao;
 import org.luyanfeng.myblog.service.BasicService;
+import org.luyanfeng.myblog.util.GenericUtil;
 
 @SuppressWarnings("unchecked")
 public class BasicServiceIml<T> implements BasicService<T> {
 
 	private BasicDao<T> dao;
-
+	protected Class<T> getEntity() {
+		return  (Class<T>) GenericUtil.getGenericClass(getClass());
+	}
 	public BasicDao<T> getDao() {
 		return dao;
 	}
@@ -33,8 +36,8 @@ public class BasicServiceIml<T> implements BasicService<T> {
 	}
 	
 	@Override
-	public List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap ,Map<String, Object> tyid) throws Exception {
-		return this.dao.getPage(skip, limit, sortMap, tyid);
+	public List<T> getPage(int skip, int limit, LinkedHashMap<String, Integer> sortMap ,Map<String, Object> whereMap) throws Exception {
+		return this.dao.getPage(skip, limit, sortMap, whereMap);
 	}
 
 	@Override
@@ -66,6 +69,11 @@ public class BasicServiceIml<T> implements BasicService<T> {
 	@Override
 	public List<T> getAll() throws Exception {
 		return this.getDao().getAll();
+	}
+	@Override
+	public T getLast() {
+		return this.getDao().getLast();
+		
 	}
 
 }

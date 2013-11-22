@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.luyanfeng.myblog.action.BasicAction;
+import org.luyanfeng.myblog.entity.AboutEntity;
 import org.luyanfeng.myblog.entity.ArticleEntity;
 import org.luyanfeng.myblog.entity.TypeEntity;
+import org.luyanfeng.myblog.service.iml.AboutServiceIml;
 import org.luyanfeng.myblog.service.iml.ArticleServiceIml;
 import org.luyanfeng.myblog.service.iml.TypeServiceIml;
 import org.springframework.context.annotation.Scope;
@@ -29,6 +31,9 @@ public class HomeAction extends BasicAction{
 	
 	@Resource(name="typeServiceIml")
 	private TypeServiceIml typeService;
+	
+	@Resource(name="aboutServiceIml")
+	private AboutServiceIml aboutService;
 
 	/**
 	 * 首页
@@ -114,6 +119,7 @@ public class HomeAction extends BasicAction{
 	 *  关于
 	 */
 	public String about(){
+		this.getRequest().setAttribute("result",this.aboutService.getLast());
 		return SUCCESS;
 	}
 	

@@ -170,4 +170,10 @@ public abstract  class BasicDaoIml<T>  implements BasicDao<T> {
 		List<T> list = this.getSession().createQuery("from "+this.getEntity().getSimpleName()).list();
 		return list;
 	}
+	@Override
+	public T getLast() {
+		return (T) this.getSession().createQuery("from "+this.getEntity().getSimpleName()+" order by time desc ")
+				.uniqueResult();
+	}
+	
 }

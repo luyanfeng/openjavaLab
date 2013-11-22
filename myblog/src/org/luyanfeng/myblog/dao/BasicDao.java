@@ -44,4 +44,9 @@ public interface BasicDao<T> {
 	 */
 	public List<T> getAll()throws Exception;
 
+	/**
+	 * 取得最新记录 
+	 */
+	public T getLast();
+
 }

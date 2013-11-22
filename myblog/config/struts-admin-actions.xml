@@ -9,6 +9,12 @@
 		<default-interceptor-ref name="authenic-stack" />
 		<action name="*" method="{1}" class="adminAction">
 			<result type="dispatcher" name="index">/WEB-INF/admin/{1}.jsp</result>
+			<result type="dispatcher" name="about">/WEB-INF/admin/{1}.jsp</result>
+			<result type="json" name="json-saveAbout" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
 		</action>
 	</package>
 <!-- 文章 -->
@@ -62,7 +68,7 @@
 			<result type="dispatcher" >/WEB-INF/admin/main/type/{1}.jsp</result>
 		</action>
 	</package>
-<!-- 类型 -->
+<!-- 标签 -->
 	<package name="tag" namespace="/admin/tag" extends="admin">
 		<action name="*" method="{1}" class="tagAction">
 			<result type="json" name="json-save" >
@@ -81,6 +87,22 @@
  				<param name="excludeNullProperties">true</param> 
 			</result>
 			<result type="dispatcher" >/WEB-INF/admin/main/tag/{1}.jsp</result>
+		</action>
+	</package>
+<!-- 图片 -->
+	<package name="image" namespace="/admin/image" extends="admin">
+		<action name="*" method="{1}" class="imageAction">
+			<result type="json" name="json-save" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="json" name="json-delete" >
+				<param name="root">jsonMap</param>
+ 				<param name="noCache">true</param>
+ 				<param name="excludeNullProperties">true</param> 
+			</result>
+			<result type="dispatcher" >/WEB-INF/admin/main/image/{1}.jsp</result>
 		</action>
 	</package>
 	
